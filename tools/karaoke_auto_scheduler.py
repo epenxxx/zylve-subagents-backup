@@ -15,6 +15,13 @@ PUBLISHED_DIR = "/root/assets/stock_karaoke_koplo/published"
 LOG_FILE = "/root/logs/karaoke_upload.log"
 TELEGRAM_SCRIPT = "/root/telegram_remote_bot/send_telegram.py"
 
+# Auto-route lewat Cloudflare WARP Proxy jika aktif
+if os.path.exists("/usr/local/bin/with_warp"):
+    os.environ["http_proxy"] = "http://127.0.0.1:8118"
+    os.environ["https_proxy"] = "http://127.0.0.1:8118"
+    os.environ["HTTP_PROXY"] = "http://127.0.0.1:8118"
+    os.environ["HTTPS_PROXY"] = "http://127.0.0.1:8118"
+
 def log(msg):
     ts = time.strftime("%Y-%m-%d %H:%M:%S")
     full_msg = f"[{ts}] {msg}"

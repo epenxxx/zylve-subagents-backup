@@ -28,6 +28,7 @@ import subprocess
 import urllib.request
 import urllib.parse
 from datetime import datetime
+import elevenlabs_engine
 
 PEXELS_KEY = "YOUR_PEXELS_API_KEY"
 EDGE_TTS = "/root/telegram_remote_bot/venv/bin/edge-tts"
@@ -109,20 +110,26 @@ def run_slot(slot_name="Automated_Slot"):
     with open(script_txt_path, "w", encoding="utf-8") as f:
         f.write("\n".join(script_lines))
 
-    # 2. Generate Voiceover & VTT
+    # 2. Generate Voiceover & VTT via ElevenLabs (Voice: George/Storyteller)
     audio_path = os.path.join(workdir, "voiceover.mp3")
     vtt_path = os.path.join(workdir, "voiceover.vtt")
-    print("[1/6] Memproduksi Voiceover & Subtitle VTT sinkron via edge-tts...")
-    tts_cmd = [
-        EDGE_TTS,
-        "--voice=en-US-ChristopherNeural",
-        "--rate=-2%",
-        "--pitch=-2Hz",
-        f"--file={script_txt_path}",
-        f"--write-media={audio_path}",
-        f"--write-subtitles={vtt_path}"
-    ]
-    subprocess.run(tts_cmd, check=True)
+    print("[1/6] Memproduksi Voiceover & Subtitle VTT sinkron via ElevenLabs Engine...")
+    try:
+        elevenlabs_engine.generate_speech_with_vtt(
+            script_txt_path, audio_path, vtt_path, voice_id=elevenlabs_engine.VOICE_SHORTS_EN
+        )
+    except Exception as e:
+        print(f"[!] ElevenLabs error: {e}, fallback ke edge-tts...")
+        tts_cmd = [
+            EDGE_TTS,
+            "--voice=en-US-ChristopherNeural",
+            "--rate=-2%",
+            "--pitch=-2Hz",
+            f"--file={script_txt_path}",
+            f"--write-media={audio_path}",
+            f"--write-subtitles={vtt_path}"
+        ]
+        subprocess.run(tts_cmd, check=True)
 
     probe = subprocess.run([
         "ffprobe", "-v", "error", "-show_entries", "format=duration",
@@ -208,9 +215,9 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     subprocess.run(render_cmd, check=True)
     print(f"[✓] Render Video Selesai: {out_mp4}")
 
-    # 6. Upload ke YouTube Akun 2
-    print("[5/6] Mengunggah video ke YouTube Akun 2 (@zylvemedia02)...")
-    upload_cmd = ["python3", UPLOAD_SCRIPT, out_mp4, title, caption]
+    # 6. Upload ke YouTube Akun 2 (Lewat Cloudflare WARP Proxy)
+    print("[5/6] Mengunggah video ke YouTube Akun 2 (@zylvemedia02) via WARP...")
+    upload_cmd = ["/usr/local/bin/with_warp", "python3", UPLOAD_SCRIPT, out_mp4, title, caption]
     upload_proc = subprocess.run(upload_cmd, capture_output=True, text=True)
     print(upload_proc.stdout)
     if upload_proc.returncode != 0:

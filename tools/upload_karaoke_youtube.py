@@ -14,6 +14,13 @@ SEO_JSON = "/root/assets/thumbnail_mutiara/seo_metadata_youtube.json"
 SEO_MD = "/root/assets/thumbnail_mutiara/seo_metadata_youtube.md"
 TELEGRAM_SCRIPT = "/root/telegram_remote_bot/send_telegram.py"
 
+# Auto-route lewat Cloudflare WARP Proxy jika aktif
+if os.path.exists("/usr/local/bin/with_warp"):
+    os.environ["http_proxy"] = "http://127.0.0.1:8118"
+    os.environ["https_proxy"] = "http://127.0.0.1:8118"
+    os.environ["HTTP_PROXY"] = "http://127.0.0.1:8118"
+    os.environ["HTTPS_PROXY"] = "http://127.0.0.1:8118"
+
 def get_description_from_md(md_path):
     with open(md_path, "r", encoding="utf-8") as f:
         content = f.read()

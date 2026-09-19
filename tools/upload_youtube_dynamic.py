@@ -15,6 +15,13 @@ from googleapiclient.http import MediaFileUpload
 TOKEN_PATH = "/root/zylve_automation/youtube_token.json"
 TELEGRAM_SCRIPT = "/root/telegram_remote_bot/send_telegram.py"
 
+# Auto-route lewat Cloudflare WARP 1.1.1.1 Proxy jika aktif
+if os.path.exists("/usr/local/bin/with_warp"):
+    os.environ["http_proxy"] = "http://127.0.0.1:8118"
+    os.environ["https_proxy"] = "http://127.0.0.1:8118"
+    os.environ["HTTP_PROXY"] = "http://127.0.0.1:8118"
+    os.environ["HTTPS_PROXY"] = "http://127.0.0.1:8118"
+
 def upload_video(video_path, thumbnail_path, title, description, tags, category_id="10", privacy_status="public"):
     print("[1/5] Memeriksa berkas video & thumbnail...")
     if not os.path.exists(video_path):

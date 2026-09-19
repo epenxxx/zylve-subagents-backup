@@ -1,7 +1,100 @@
 # Memori Lintas Sesi (Cimoy)
-Terakhir Diperbarui: 2026-09-19 14:53 WIB (INTEGRASI PIXABAY DUAL-ENGINE VIDEO ALAM AKTIF)
+Terakhir Diperbarui: 2026-09-20 02:00 WIB (PRODUKSI KARAOKE VIRAL: HELIKOPTER TURUN KE PADANG)
 
 ## 1. Status Aktif
+- **PRODUKSI KARAOKE VIRAL: SABRINAAA - HELIKOPTER TURUN KE PADANG (20 Sep 2026)**:
+  1. *Lagu Sumber*: [https://youtu.be/6iAf-K3pf8U](https://youtu.be/6iAf-K3pf8U) (2.6M views, Ady N Jas / Dike Sabrina).
+  2. *Workspace*: `/root/assets/karaoke_workspace/helikopter_padang/`.
+  3. *Audio Karaoke*: `karaoke_helikopter_padang.mp3` (15.4 MB, MP3 320k, AI Separation ZeroGPU, mastered -14 LUFS super smooth).
+  4. *Lirik & Subtitle*: `karaoke.ass` (67 baris, font 34px, margin 45, timing sinkron milidetik vokal asli + efek kuning berjalan `\kf`).
+  5. *Latar Visual*: `bg_nature.mp4` (Pexels alam warm nature sunset 1080p).
+  6. *Render Video*: `karaoke_helikopter_padang_1080p.mp4` via akselerasi hardware VAAPI (`h264_vaapi`).
+  7. *Paket SEO*: `seo_package.json` siap upload resmi ke YouTube 1 (ZYLVEmedia).
+- **GOOGLE COLAB 24/7 KEEP-ALIVE & AUTO-RECONNECT RESMI AKTIF (20 Sep 2026)**:
+  1. *Target Notebook*: [`Untitled0.ipynb`](https://colab.research.google.com/drive/1AMbpmoip7e_ZDgYHujHVA69RdZILJi5d?usp=sharing).
+  2. *Hardware*: GPU Nvidia Tesla T4 (16 GB VRAM) + 13 GB RAM + 112 GB SSD Cloud.
+  3. *Engine Pengawas*: [`/root/tools/colab_keeper.py`](file:///root/tools/colab_keeper.py) berbasis Playwright headless.
+  4. *Daemon Service*: `colab-keeper.service` (systemd active running 24/7).
+  5. *Fungsi Otomasi*: Deteksi status connect berkala, auto-click reconnect jika terputus, dismiss dialog timeout, dan bypass idle timeout Google Colab otomatis.
+  6. *Monitoring*: Log di [`/root/logs/colab_keeper.log`](file:///root/logs/colab_keeper.log) dan tangkapan layar status di [`/root/screenshots/colab_keeper_status.png`](file:///root/screenshots/colab_keeper_status.png).
+- **GOOGLE CLOUD CONSOLE TERKONEKSI PENUH & OTONOM (20 Sep 2026)**:
+  1. *Service Account*: `gcp-286@api-key-467907.iam.gserviceaccount.com`.
+  2. *Project Default*: `api-key-467907` (Project Number: `74246543304`).
+  3. *Kunci Kredensial*: `/root/.config/gcloud/service_account_key.json` (chmod 600).
+  4. *API Teraktivasi*: Cloud Resource Manager API, YouTube Data API v3, Gemini API, Cloud Storage, Service Usage API, dsb.
+  5. *Status Kontrol*: Cimoy memiliki kuasa otonom penuh mengelola API, resource cloud, dan kredensial langsung dari terminal tanpa web browser selamanya.
+- **MANDAT MUTLAK TELEGRAM: ANTI-AI & 100% REDAKSI MANUSIA MURNI (19 Sep 2026)**:
+  1. *Larangan Kata AI*: DILARANG KERAS menggunakan kata "AI", "Bot", "Autonomous", "Sistem", "Algoritma", "Prompt", "LLM", "Otomasi", atau istilah teknologi lainnya di saluran Telegram [@zylvemedia_news](https://t.me/zylvemedia_news).
+  2. *Pembersihan Pesan Uji Coba*: Seluruh pesan teks uji coba yang memuat istilah teknis/robotik (Message ID 4, 5, 7) telah dihapus bersih 100% dari saluran.
+  3. *Persona Resmi Redaksi*: Seluruh kiriman wajib tampil 100% dari sudut pandang **Tim Jurnalis & Redaksi ZYLVEmedia**:
+     - Headline aktual dan lugas khas kantor berita nasional.
+     - Ringkasan fakta 5W+1H yang santun, kredibel, dan berbobot.
+     - Penutup natural dengan tautan baca artikel di portal web (`https://zylvemedia.web.id`) serta pancingan diskusi publik yang ramah.
+- **INTEGRASI RESMI SALURAN TELEGRAM @zylvemedia_news (19 Sep 2026)**:
+  1. *Target Saluran*: **@zylvemedia_news** ([t.me/zylvemedia_news](https://t.me/zylvemedia_news)), Chat ID numerik: `-1004342580936`.
+  2. *Administrator Aktif*: Bot `@agyzyl_bot` terverifikasi memiliki izin posting (uji coba teks & poster sukses tayang).
+  3. *Engine Penyiaran*: [`/root/tools/broadcast_telegram_channel.py`](file:///root/tools/broadcast_telegram_channel.py) dengan akselerasi rute Cloudflare WARP (upload poster HD dalam 1 detik).
+  4. *Otomasi Harian*: Resmi tertanam di pipeline [`scheduled_runner.py`](file:///root/zylve_automation/scheduled_runner.py) untuk menyuplai konten berita dan poster 3x sehari (07:14, 12:07, 19:34 WIB) menuju target 1.000 subscriber monetisasi iklan Telegram (bagi hasil 50% TON).
+- **MIGRASI TOTAL UPLOAD TIKTOK KE ZERNIO API RESMI (19 Sep 2026)**:
+  1. *Perintah User*: Seluruh urusan posting/upload TikTok wajib eksklusif melalui Zernio API resmi (TikTok `@zylve70`, Account ID `6aae7e918d284ffb211b417d`).
+  2. *Refactoring Skrip Inti*:
+     - [`/root/zylve_automation/upload_photo_to_tiktok.py`](file:///root/zylve_automation/upload_photo_to_tiktok.py) kini 100% menggunakan `zernio_client.ZernioClient().post_tiktok_media()` untuk foto/poster tunggal & multi-slide.
+     - [`/root/zylve_automation/upload_to_tiktok.py`](file:///root/zylve_automation/upload_to_tiktok.py) kini 100% menggunakan `zernio_client.ZernioClient().post_tiktok_video()` untuk video MP4.
+     - [`/root/tools/zernio_client.py`](file:///root/tools/zernio_client.py) diperluas dengan method `post_tiktok_media()` otomatis presign + upload binary + publish.
+  3. *Manfaat Sistem*: Zero browser Playwright, Zero Captcha puzzle, Zero IP blocking, Zero cookies expired, dan eksekusi instan dalam hitungan detik.
+- **YOUTUBE DATA API V3 RESMI AKTIF UNTUK AKUN 2 @ZYLVEmedia02 (19 Sep 2026)**:
+  1. *Kredensial*: [`client_secret_acc2.json`](file:///root/zylve_automation/client_secret_acc2.json) (Project 661093772864) & [`youtube_acc2_token.json`](file:///root/zylve_automation/youtube_acc2_token.json).
+  2. *Status Channel*: **ZYLVEmedia02** (Channel ID: `UCScR_3Gl3Wna-w_rTxnN2UQ`), 2.570 subscribers, 4 videos.
+  3. *Uploader Mandiri*: [`/root/zylve_automation/upload_to_youtube_acc2.py`](file:///root/zylve_automation/upload_to_youtube_acc2.py) resmi 100% migrasi ke YouTube Data API v3 (resumable upload, auto tags, zero browser, zero Captcha, zero verification prompt Google).
+- **RILIS SUKSES YOUTUBE SHORTS AKUN 2 BERMUDA TRIANGLE ELEVENLABS (19 Sep 2026 22:14 WIB)**:
+  1. *Video Link*: [https://youtube.com/shorts/6XUTIze2A6A](https://youtube.com/shorts/6XUTIze2A6A)
+  2. *Spesifikasi*: 1080x1920 9:16, 5 scene multi-cut dinamis Pexels + Pixabay, voiceover ElevenLabs George (`JBFqnCBsd6RMkjVDRZzb`), subtitle ASS eye-tracking kuning emas sinkron milidetik.
+  3. *Perbaikan Bug*: Upload Akun 2 Studio ([`upload_to_youtube_acc2.py`](file:///root/zylve_automation/upload_to_youtube_acc2.py)) dialihkan ke direct server IP terpercaya (bypass Google challenge prompt WARP). Bukti terverifikasi di [`yt_acc2_shorts_proof.png`](file:///root/screenshots/yt_acc2_shorts_proof.png).
+- **MIGRASI TOTAL SELURUH VOICEOVER KE ELEVENLABS UNIVERSAL ENGINE (19 Sep 2026)**:
+  1. *Universal Engine*: [`/root/tools/elevenlabs_engine.py`](file:///root/tools/elevenlabs_engine.py) resmi ditingkatkan dengan dukungan audio MP3 + konversi otomatis `with-timestamps` ke WebVTT (`.vtt`) milidetik.
+  2. *Pemilihan Voice Baku (Premade Tier / Bebas 402)*:
+     - **YouTube Shorts Akun 2**: Voice `JBFqnCBsd6RMkjVDRZzb` (George - Warm Captivating Storyteller) / `TX3LPaxmHKxFdv7VOQHJ` (Liam - Creator).
+     - **Berita Omnichannel (TikTok/FB/Bilibili)**: Voice `onwK4e9ZLuTAKqWW03F9` (Daniel - Steady Broadcaster) & `EXAVITQu4vr4xnSDxMaL` (Sarah - Mature Reassuring News).
+  3. *Pipeline Terintegrasi Penuh*:
+     - YouTube Shorts Akun 2 ([`run_autonomous_shorts_pipeline.py`](file:///root/tools/run_autonomous_shorts_pipeline.py)) untuk slot 22:00, 02:00, 06:00 WIB.
+     - Generator Berita Omnichannel ([`voiceover_generator.py`](file:///root/zylve_automation/voiceover_generator.py)) untuk TikTok Studio & FB Reels.
+     - High-RPM Shorts generator ([`generate_high_rpm_shorts.py`](file:///root/tools/generate_high_rpm_shorts.py)).
+  4. *Proteksi Anti-Macet*: Fallback otomatis ke Edge-TTS tetap siaga 100% jika kuota ElevenLabs habis, menjamin video tidak pernah gagal rilis.
+- **ZERNIO API RESMI AKTIF UNTUK POSTING SOSMED TIKTOK (19 Sep 2026)**:
+  1. *API Key*: Tersimpan aman di `/root/.config/zernio/api_key` (`ZERNIO_API_KEY`).
+  2. *Akun Terhubung*: TikTok `@zylve70` (*ZYLVEmedia*, 300 followers, 8.8k likes, 181 videos) status **Active**.
+  3. *Hak Akses*: `video.upload`, `video.publish`, `comment.list`, `comment.list.manage`, `user.info.stats` via official business API.
+  4. *Modul Client*: [`/root/tools/zernio_client.py`](file:///root/tools/zernio_client.py) siap dipakai seluruh subagen untuk publishing dan scheduling tanpa terkena captcha browser.
+- **RILIS SUKSES KARAOKE ROCK CINTA DARI SEBERANG VIA WARP (19 Sep 2026)**:
+  1. *Video ID & Link*: `4Gu3Ryp1ids` -> [https://www.youtube.com/watch?v=4Gu3Ryp1ids](https://www.youtube.com/watch?v=4Gu3Ryp1ids).
+  2. *Spesifikasi*: 1080p 30fps VAAPI, audio EBU R128 (-15 dB) hasil separasi Hugging Face ZeroGPU, subtitle ASS center font 52 kuning emas berjalan sinkron milidetik via Groq Whisper.
+  3. *Thumbnail 16:9*: Dibuat via Gemini Web Imagen Engine berpatokan foto artis asli (Zidan & Yaya Nadila) di panggung konser rock + tipografi 3D emas + badge *by ZYLVEmedia NADA PAS*, metadata C2PA dibersihkan 100%.
+  4. *Playlist Resmi*: Dibuatkan playlist baru `PLCW2dUKrsviY` (*Karaoke Rock & Pop Rock Indonesia - ZYLVEmedia*) berisi 2 video rock (`uuiQOsGP7Wk` & `4Gu3Ryp1ids`).
+  5. *Koneksi Upload*: 100% menggunakan Cloudflare WARP 1.1.1.1 Proxy (`warp=on`), zero IP block.
+- **RILIS SUKSES KARAOKE ROCK CINTA LUAR BIASA VIA WARP (19 Sep 2026)**:
+  1. *Video ID & Link*: `uuiQOsGP7Wk` -> [https://www.youtube.com/watch?v=uuiQOsGP7Wk](https://www.youtube.com/watch?v=uuiQOsGP7Wk).
+  2. *Spesifikasi*: 1080p 30fps VAAPI, audio EBU R128 (-15 dB) hasil separasi Hugging Face ZeroGPU, subtitle ASS center font 52 kuning emas berjalan.
+  3. *Thumbnail 16:9*: Dibuat via Gemini Web Imagen Engine berpatokan foto artis asli Zinidin Zidan & Yaya Nadila di panggung rock + tipografi 3D emas + badge *by ZYLVEmedia NADA PAS*, metadata C2PA dibersihkan 100%.
+  4. *Koneksi Upload*: 100% menggunakan Cloudflare WARP 1.1.1.1 Proxy (`warp=on`), zero IP block.
+- **CLOUDFLARE WARP 1.1.1.1 PROXY RESMI AKTIF UNTUK UPLOAD SOSMED (19 Sep 2026)**:
+  1. *Arsitektur Proxy Terisolasi*: `cloudflare-warp` berjalan di mode proxy SOCKS5 (`127.0.0.1:40000`) + Privoxy HTTP bridge (`127.0.0.1:8118`).
+  2. *Keamanan Jaringan Server*: IP server & koneksi SSH tetap normal/asli (`121.101.130.77`), tidak terganggu atau putus sama sekali.
+  3. *IP Bersih Anti-Blokir*: Semua upload/posting sosmed (YouTube API, Playwright Akun 2, Bilibili) diarahkan lewat IP Cloudflare WARP (`warp=on`), bypass blokir/shadowban IP hosting.
+  4. *CLI Helper*: Script global [`/usr/local/bin/with_warp`](file:///usr/local/bin/with_warp) siap bungkus perintah apapun agar lewat WARP.
+  5. *Integrasi Pipeline Menyeluruh*: 
+     - **YouTube**: [`upload_youtube_dynamic.py`](file:///root/tools/upload_youtube_dynamic.py), [`upload_karaoke_youtube.py`](file:///root/tools/upload_karaoke_youtube.py), [`upload_to_youtube_acc2.py`](file:///root/zylve_automation/upload_to_youtube_acc2.py), [`run_autonomous_shorts_pipeline.py`](file:///root/tools/run_autonomous_shorts_pipeline.py).
+     - **TikTok**: [`upload_photo_to_tiktok.py`](file:///root/zylve_automation/upload_photo_to_tiktok.py), [`upload_to_tiktok.py`](file:///root/zylve_automation/upload_to_tiktok.py), [`upload_affiliate_acc2.py`](file:///root/zylve_automation/upload_affiliate_acc2.py).
+     - **Bilibili**: [`upload_to_bilibili.py`](file:///root/zylve_automation/upload_to_bilibili.py), [`run_tim_bilibili_pipeline.py`](file:///root/tools/run_tim_bilibili_pipeline.py).
+     - **Facebook**: [`upload_to_facebook.py`](file:///root/zylve_automation/upload_to_facebook.py).
+- **MANDAT EFISIENSI TOKEN MUTLAK CIMOY (19 Sep 2026)**:
+  1. *Peran Cimoy Tunggal*: Khusus operasional Antigravity, manajemen workspace, pengawasan file, dan orkestrasi tugas.
+  2. *Delegasi Penuh ke API Subagen*: Seluruh beban pembuatan konten, naskah, audio, visual, video, dan SEO 100% menggunakan API eksternal mandiri (Groq LPU, ElevenLabs, Gemini Web, Hugging Face ZeroGPU, Pexels, Pixabay, YouTube API v3).
+  3. *Zero Token Waste*: Token Cimoy tidak boleh dibakar untuk komputasi atau pembuatan naskah masif. Subagen berjalan mandiri via background script.
+- **STANDAR MULTI-CLIP DINAMIS YOUTUBE SHORTS AKTIF (19 Sep 2026)**:
+  1. *Aturan Baku Boss*: DILARANG HANYA 1 GAMBAR / VIDEO PER KLIP. Video Shorts wajib multi-scene bervariasi mengikuti topik dan naskah.
+  2. *Engine Multi-Cut*: [`/root/tools/multiclip_shorts_builder.py`](file:///root/tools/multiclip_shorts_builder.py) menggabungkan 4-6 klip video berbeda (Pexels + Pixabay) dengan potongan scene dinamis tiap 4.5 detik.
+  3. *Integrasi Pipeline*: Tertanam resmi di [`/root/tools/run_autonomous_shorts_pipeline.py`](file:///root/tools/run_autonomous_shorts_pipeline.py) untuk slot upload YouTube Shorts @zylvemedia02 pukul 22:00, 02:00, dan 06:00 WIB.
+  4. *Retensi Penonton*: Menghilangkan kebosanan visual dan melipatgandakan Average Percentage Viewed (APV) untuk mendorong algoritma viralitas YouTube.
 - **PIXABAY API RESMI AKTIF SEBAGAI DUAL-ENGINE VIDEO ALAM (19 Sep 2026)**:
   1. *Kunci API*: Kunci Pixabay aktif tersimpan di `/root/.config/pixabay/api_key` & environment `PIXABAY_API_KEY`.
   2. *Engine*: [`/root/tools/pixabay_engine.py`](file:///root/tools/pixabay_engine.py) siap unduh video HD/4K dan musik bebas royalti.

@@ -16,6 +16,7 @@ import re
 import subprocess
 import urllib.request
 import urllib.parse
+import elevenlabs_engine
 
 WORKDIR = "/root/projects/shorts_mariana_trench"
 PEXELS_KEY = "YOUR_PEXELS_API_KEY"
@@ -64,20 +65,26 @@ def run():
     with open(script_txt_path, "w", encoding="utf-8") as f:
         f.write("\n".join(SCRIPT_LINES))
 
-    # 2. Voiceover & Subtitle VTT langsung dari edge-tts (100% Sinkron)
+    # 2. Voiceover & Subtitle VTT langsung dari ElevenLabs (Voice: George/Storyteller)
     audio_path = os.path.join(WORKDIR, "voiceover_synced.mp3")
     vtt_path = os.path.join(WORKDIR, "voiceover_synced.vtt")
-    print("[1/5] Memproduksi Voiceover & Subtitle Sinkron via edge-tts...")
-    tts_cmd = [
-        EDGE_TTS,
-        "--voice=en-US-ChristopherNeural",
-        "--rate=-3%",
-        "--pitch=-2Hz",
-        f"--file={script_txt_path}",
-        f"--write-media={audio_path}",
-        f"--write-subtitles={vtt_path}"
-    ]
-    subprocess.run(tts_cmd, check=True)
+    print("[1/5] Memproduksi Voiceover & Subtitle Sinkron via ElevenLabs Engine...")
+    try:
+        elevenlabs_engine.generate_speech_with_vtt(
+            script_txt_path, audio_path, vtt_path, voice_id=elevenlabs_engine.VOICE_SHORTS_EN
+        )
+    except Exception as e:
+        print(f"[!] ElevenLabs error: {e}, fallback ke edge-tts...")
+        tts_cmd = [
+            EDGE_TTS,
+            "--voice=en-US-ChristopherNeural",
+            "--rate=-3%",
+            "--pitch=-2Hz",
+            f"--file={script_txt_path}",
+            f"--write-media={audio_path}",
+            f"--write-subtitles={vtt_path}"
+        ]
+        subprocess.run(tts_cmd, check=True)
     
     probe = subprocess.run([
         "ffprobe", "-v", "error", "-show_entries", "format=duration",

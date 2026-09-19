@@ -1,6 +1,6 @@
 # CIMOY MASTER SYSTEM ARCHITECTURE & OPERATIONAL MANUAL
 *Dokumen Tunggal Terkonsolidasi Seluruh Sistem Kerja, Aturan, Memori, Skill, dan Otomasi Cimoy*
-**Waktu Pembaruan:** 2026-09-19 03:30:01 WIB
+**Waktu Pembaruan:** 2026-09-20 03:30:01 WIB
 **Penyedia Akun Cadangan Cloud:** Google Drive `zylve0001@gmail.com`
 **Folder Target:** `Cimoy-System-Backup` (ID: `1mV_2jhUPY92mGxUQUbXnRXAWWNOW6aUB`)
 **Status Sistem Penjadwalan:** Job Cimoy (Native Linux Crontab `cron.service`)
@@ -42,6 +42,7 @@ Dokumen ini menjadi aturan standar (Rule) bagi agen dalam mengeksekusi tugas di 
 ## 4. Gaya Komunikasi & Pelaporan (Mode Caveman)
 - **Mode Caveman (/caveman)**: Wajib bicara gaya manusia purba. Sangat singkat. Langsung inti. Tanpa basa-basi.
 - **Bahasa**: SELALU Bahasa Indonesia. Wajib. Jangan pakai bahasa lain kecuali kode atau nama sistem.
+- **Persona Penjawab**: Setiap pengguna bertanya atau berdialog, **WAJIB MANAJER (`agent_orchestrator`)** yang merespons mewakili seluruh subagen satu pintu.
 - **Integritas Kode**: Perintah terminal, sintaks kode, nama fungsi/variabel tetap asli, jangan diubah atau diterjemahkan.
 
 ---
@@ -195,34 +196,37 @@ Sistem 7 pilar otomatis pembuatan, penerbitan, dan pembersihan video karaoke You
 - [karaoke-marketing-promoter](file:///root/.agents/skills/karaoke-marketing-promoter/SKILL.md) (SOP Promosi & Distribusi Omnichannel Konten Lagu Karaoke ZYLVEmedia ke TikTok, Reels, Shorts, & FB Groups).
 - [comment-engager](file:///root/.agents/skills/comment-engager/SKILL.md) (Subagen Pembalas Komentar Netizen Otomatis Ramah & Cepat via Groq LPU).
 - [cross-format-repurposer](file:///root/.agents/skills/cross-format-repurposer/SKILL.md) (Subagen Pengubah 1 Materi Berita/Lagu Menjadi 5 Format Omnichannel Lengkap).
-- [performance-auditor](file:///root/.agents/skills/performance-auditor/SKILL.md) (Subagen Audit Kinerja Konten, Analisis Views, & Rekomendasi Jam Tayang).
+- [agent-short](file:///root/.agents/skills/agent-short/SKILL.md) (Agent Short: Produksi Full-Stack & Akselerator YouTube Shorts ZYLVEmedia02 Menuju 10 Juta Views + Otomasi Upload 3x Harian 22:00-06:00 WIB).
+- [claude-skills](file:///root/projects/claude_skills/repo/README.md) (Perpustakaan 438 Skill Claude/Gemini CLI: Engineering, DevOps, AEO/Marketing, C-Level Advisory, Research Ops. Router otomatis: [/root/tools/claude_skill_router.py](file:///root/tools/claude_skill_router.py)).
+- [remove-ai-marks](file:///root/.agents/skills/remove-ai-marks/SKILL.md) (Standar Produksi Pembersih AI Watermarks, Metadata C2PA/EXIF/XMP, dan Unicode Tersembunyi via HTTP Service lokal port 8765 & CLI `clean-ai-watermark`).
 
 
-## 4. Tim Subagen Khusus (Siap Dipanggil via invoke_subagent)
-- **`tiktok_news_scout`**: Subagen Riset & Verifikator Berita TikTok Hari Ini (Agent 0). Mencari topik berita terupdate hari itu di TikTok, verifikasi silang fakta ke portal berita populer (Detik, Kompas, CNN, CNBC, Tempo), dan melempar payload data terverifikasi ke Agent 1 Storyboard. Skill: [.agents/skills/tiktok-news-scout](file:///root/.agents/skills/tiktok-news-scout/SKILL.md).
-- **`radar_berita`**: Riset berita viral 24 jam terakhir dari media arus utama kredibel (Prioritas: CNN, CNBC, Detik, Tempo; Antara hanya fallback). Bebas hoaks. (Model: `claude-opus-4-6-thinking`)
-- **`art_director`**: Merancang Master Template Infografis 3D Pixar 1 Slide Poster Tunggal (rasio 3:4, 6 Poin Baku, simbol visual tematik nyata tanpa kartu 1-2-3, watermark ZYLVEmedia).
-- **`copywriter_humanizer`**: Meracik hook judul emosional, storytelling percakapan manusiawi, 5 hashtag viral, & first pinned comment. (Model: `claude-opus-4-6-thinking`)
-- **`tiktok_operator`**: Otomasi upload TikTok Studio (Mode Photos 1 Slide Poster, WAJIB sound saran resmi TikTok via '+ Add sound', human jitter timing, audit & laporan Telegram).
-- **`competitor_spy`**: Intelijen topik viral dari akun kompetitor berita besar di TikTok (Tribun, Folkative, Narasi).
-- **`community_analyst`**: Analisis sentimen komentar netizen untuk bahan topik postingan berseri berikutnya (Part 2).
-- **`audio_scout`**: Kurasi sound musik TikTok & Reels yang sedang tren serta mencocokkan genre emosi berita.
-- **`omnichannel_distributor`**: Sindikasi postingan ke Facebook Reels, YouTube Shorts, & Bilibili (video vertikal 9:16, MINIMAL 8 DETIK, audio breaking news terstandar formula baku: Vokal 1.45, BGM 0.18, amix + alimiter=limit=0.95 anti-clipping) serta sinkronisasi web portal. YouTube Shorts wajib via YouTube Data API v3 resmi (`youtube_token.json`).
-- **`session_watchdog`**: Pemantau kesehatan sesi cookies TikTok, Facebook, & YouTube dengan alert Telegram.
-- **`community_replier`**: Pembalas komentar netizen ramah dan solutif bergaya 100% manusia asli (anti-robot).
-- **`visual_qc_auditor`**: Quality Control visual sebelum rilis: verifikasi poster bebas kotak kartu 1-2-3, zero typo/glitch, rasio 3:4 akurat, dan simbol topik 100% relevan.
-- **`seo_web_publisher`**: Optimasi artikel berita portal `zylvemedia.web.id` (struktur SEO Google, keyword organik, meta tag, backlink medsos) untuk mendatangkan traffic pencarian web.
-- **`post_verification_growth`**: Verifikasi status tayang postingan di semua platform (TikTok, Facebook Reels, YouTube Shorts), audit metrik engagement (views, likes, comments, shares), dan menyusun panduan perbaikan konten berikutnya untuk Cimoy. Skrip: `/root/zylve_automation/post_verifier_analytics.py`.
-- **`fb_group_marketer`**: Subagen Pemasaran & Distribusi Iklan Grup Facebook. Menyebarkan video YouTube 1 (Karaoke by ZYLVEmedia) ke grup-grup Facebook sasaran dengan variasi pesan santun, humanis anti-spam, dan delay acak aman.
-- **`humanizer_anti_slop`**: Subagen Kurator & Auditor Humanis Anti-AI-Slop Ketat. Memeriksa judul, deskripsi, thumbnail, dan lirik agar 100% bercita rasa manusia asli, tanpa frasa robot klise, tanpa glitch AI generik, dan lolos uji `/root/tools/anti_slop_auditor.py`.
-- **`karaoke_growth_analyst`**: Subagen Analis Pertumbuhan & Monetisasi YouTube 1. Memantau views/watch time, meriset lagu trending (Indo & Luar), memberi feedback strategi ke Agent 1 via `/root/zylve_automation/karaoke_agent1_feedback.json`, dan mengawal jadwal tayang 3x sehari.
-- **`karaoke_song_researcher`**: Agent 1 Riset & Unduh Lagu Viral format MP3 (`input.mp3`) dan WAJIB ekstraksi referensi lirik resmi terpercaya (`lirik_resmi.txt`) via `/root/tools/fetch_official_lyrics.py` (anti-halusinasi STT).
-- **`karaoke_audio_processor`**: Agent 2 Pemisah Audio & Ekstraktor Instrumen by ZYLVEmedia di Hugging Face (`abidlabs/music-separation` ZeroGPU) + Studio HD Audio Mastering & Volume Booster (+7.6 dB, EBU R128 `-14 LUFS`, Bass & Shimmer Polish 320k) via `/root/tools/hf_karaoke_separator.py`.
-- **`karaoke_video_creator`**: Agent 3 Pembuat Video Karaoke 16:9 Full HD (1080p, Terkunci 30 fps). WAJIB background pemandangan alam asli Pexels jernih (air terjun, pegunungan, danau, pantai - DILARANG latar neon buatan & AI slop) berganti unik tiap lagu via `/root/tools/get_unique_karaoke_bg.py`, subtitle ASS berbasis lirik resmi font 76 tengah layar (`Alignment 5`), efek lirik kuning berjalan (\kf), render akselerasi iGPU (AMD Radeon Vega 11 VAAPI `/dev/dri/renderD128`) jernih & hemat storage (<50 MB).
-- **`karaoke_thumbnail_designer`**: Agent 4 Modifikasi Thumbnail YouTube Karaoke 16:9 Full HD di Google Flow berbasis thumbnail asli lagu resmi, teks 3D emas megah, badge no-vocal, mikrofon vintage, lighting panggung (`/root/tools/flow_generate_karaoke_thumbnail_full.py`).
-- **`karaoke_youtube_seo`**: Agent 5 Spesialis SEO YouTube Karaoke: Judul CTR tinggi, deskripsi humanis-friendly anti-AI-slop lengkap lirik & kredit, serta 15+ hashtag & tag organik.
-- **`karaoke_youtube_uploader`**: Agent 6 Eksekutor Upload & Publikasi YouTube Karaoke Resmi: Upload video 16:9 1080p, set custom thumbnail Google Flow, kategori Musik 10, privasi publik via YouTube Data API v3 resmi (`youtube_token.json`).
-- **`karaoke_storage_cleaner`**: Agent 7 Janitor Pembersih Storage: Menghapus file lokal mentah (MP4, WAV, MP3, footage latar, thumbnail mentah) secara otomatis 24 jam pasca-sukses tayang di YouTube, metadata & log tetap aman.
+## 4. Tim Subagen Khusus (Telah Diselaraskan 100% dengan Skill Relevan)
+- **`agent_short`**: Subagen Produksi & Akselerasi YouTube Shorts Akun 2 (@zylvemedia02). Skill: `agent-short`, `cs-video-content-strategist`, `agency-short-video-editing-coach`, `agency-video-optimization-specialist`, `cs-youtube-full`.
+- **`tiktok_news_scout`**: Subagen Riset & Verifikasi Berita TikTok (Agent 0). Skill: `tiktok-news-scout`, `agency-trend-researcher`, `cs-deep-research`.
+- **`radar_berita`**: Riset berita viral 24 jam media arus utama kredibel. Skill: `agency-research-synthesist`, `g0dm0d3-engine`, `deep-research`.
+- **`art_director`**: Master visual infografis 3:4 fotorealistis. Skill: `infographic-storyboard`, `agency-visual-storyteller`, `agency-brand-guardian`, `no-ai-slop`.
+- **`copywriter_humanizer`**: Hook emosional & percakapan luwes anti-klise. Skill: `content-humanizer`, `agency-content-creator`, `cs-content-creator`.
+- **`tiktok_operator`**: Otomasi upload TikTok Studio (+ Add sound). Skill: `agency-tiktok-strategist`, `browser-automation`.
+- **`competitor_spy`**: Intelijen topik viral akun kompetitor besar. Skill: `agency-trend-researcher`, `cs-competitive-matrix`.
+- **`community_analyst`**: Analisis sentimen komentar netizen untuk Part 2. Skill: `agency-feedback-synthesizer`, `community-analyst`.
+- **`audio_scout`**: Kurasi sound musik tren & emosi berita. Skill: `agency-game-audio-engineer`.
+- **`omnichannel_distributor`**: Distribusi video 9:16 (FB Reels, YT Shorts, Bilibili, Web). Skill: `cross-format-repurposer`, `agency-multi-platform-publisher`, `agency-video-streaming-engineer`.
+- **`session_watchdog`**: Pemantau kesehatan sesi cookies & disk. Skill: `agency-sre-site-reliability-engineer`, `status`.
+- **`community_replier`**: Balas komentar netizen humanis cepat (<0.3s). Skill: `comment-engager`.
+- **`visual_qc_auditor`**: Quality Control visual rasio 3:4 bebas glitch. Skill: `agency-ui-finish-gate-reviewer`, `agency-evidence-collector`, `no-ai-slop`.
+- **`seo_web_publisher`**: Optimasi artikel web zylvemedia.web.id disitasi AI search. Skill: `cs-aeo`, `agency-seo-specialist`, `agency-agentic-search-optimizer`.
+- **`post_verification_growth`**: Verifikasi status tayang & engagement. Skill: `performance-auditor`, `agency-analytics-reporter`.
+- **`fb_group_marketer`**: Pemasaran video ke grup FB santun anti-spam. Skill: `fb-group-marketing`, `agency-social-media-strategist`.
+- **`humanizer_anti_slop`**: Kurator konten anti-AI-slop & anti frasa robotik. Skill: `humanizer-anti-slop`, `no-ai-slop`.
+- **`karaoke_growth_analyst`**: Analis views & trending lagu YouTube 1. Skill: `karaoke-growth-analyst`, `agency-analytics-reporter`.
+- **`karaoke_song_researcher`**: Agent 1 riset lagu viral & lirik resmi terpercaya. Skill: `karaoke-song-researcher`, `cs-youtube-full`.
+- **`karaoke_audio_processor`**: Agent 2 pemisah vokal HuggingFace + mastering sutra -14 LUFS zero hiss. Skill: `karaoke-audio-processor`, `agency-game-audio-engineer`.
+- **`karaoke_video_creator`**: Agent 3 video 16:9 alam Pexels, ASS sync, render VAAPI. Skill: `karaoke-video-creator`, `agency-video-streaming-engineer`.
+- **`karaoke_thumbnail_designer`**: Agent 4 thumbnail 3D emas megah Google Flow acuan foto asli. Skill: `karaoke-thumbnail-designer`, `agency-brand-guardian`.
+- **`karaoke_youtube_seo`**: Agent 5 SEO YouTube ramah penonton & kredit resmi musisi. Skill: `karaoke-youtube-seo`, `cs-youtube-full`, `agency-video-optimization-specialist`.
+- **`karaoke_youtube_uploader`**: Agent 6 eksekutor upload Data API v3 resmi. Skill: `agency-devops-automator`.
+- **`karaoke_storage_cleaner`**: Agent 7 janitor pembersih file media mentah >24 jam. Skill: `karaoke-storage-cleaner`, `agency-devops-automator`.
 - [karaoke-song-researcher](file:///root/.agents/skills/karaoke-song-researcher/SKILL.md) (SOP Agent 1: Riset Lagu & Ekstraksi Lirik Resmi Terpercaya).
 - [karaoke-audio-processor](file:///root/.agents/skills/karaoke-audio-processor/SKILL.md) (SOP Agent 2: Pembuat Lagu Karaoke di Hugging Face + Studio HD Mastering).
 - [karaoke-thumbnail-designer](file:///root/.agents/skills/karaoke-thumbnail-designer/SKILL.md) (SOP Agent 4: Modif Thumbnail di Google Flow).
@@ -238,6 +242,14 @@ Sistem 7 pilar otomatis pembuatan, penerbitan, dan pembersihan video karaoke You
 - **`comment_engager`**: Subagen Pembalas Komentar Netizen Otomatis. Merespons interaksi audiens di TikTok & YouTube secara santun, cerdas, humanis, dan kilat via Groq LPU (<0.3 detik) untuk mendongkrak skor algoritma engagement. Skrip: `/root/tools/comment_engager.py`.
 - **`cross_format_repurposer`**: Subagen Omnichannel Multi-Format. Mengubah 1 materi berita atau lagu menjadi 5 format media sekaligus (Reels/Shorts 8s script, thread X, Telegram broadcast, caption IG/FB, meta desc SEO) dalam hitungan detik. Skrip: `/root/tools/cross_format_repurposer.py`.
 - **`performance_auditor`**: Subagen Audit Kinerja & Analisis Jam Tayang. Menganalisis log penayangan TikTok & YouTube serta merumuskan rekomendasi jam posting emas dan topik berpotensi viral tinggi. Skrip: `/root/tools/performance_auditor.py`.
+- **`agent_orchestrator`**: Super Manager Seluruh Subagen ZYLVEmedia. Memimpin dan mengorkestrasi 5 divisi subagen (Berita, Shorts, Bilibili, Karaoke, Utility), mengendalikan antrean hardware VAAPI (`/tmp/vaapi.lock`), mengawasi kesehatan proses anti-deadlock, dan menyusun Executive Report harian via Groq LPU & Gemini API (Zero Token Cimoy). Skill: [.agents/skills/agent-orchestrator](file:///root/.agents/skills/agent-orchestrator/SKILL.md). Skrip: [`/root/tools/agent_manager_orchestrator.py`](file:///root/tools/agent_manager_orchestrator.py).
+- **`tim_bilibili`**: Tim Bilibili (Pengelola Akun & Produksi Konten Cuan Full-Stack Bilibili). Bertugas akselerasi syarat monetisasi (Creator Incentive Level 4 / 1k followers / 100k views), riset niche RPM tinggi (Sains/Luar Angkasa/AI), optimasi koin Sanlian, integrasi cuan afiliasi (Daihuo), jadwal otomatis 3x sehari jam ramai China (11:30, 17:30, 20:30 WIB), dan eksekusi hardware VAAPI Radeon Vega 11. Skill: [.agents/skills/agent-bilibili](file:///root/.agents/skills/agent-bilibili/SKILL.md). Runner: [`/root/tools/run_tim_bilibili_pipeline.py`](file:///root/tools/run_tim_bilibili_pipeline.py).
+- **`tim_audit_sop`**: Tim Audit SOP, Kepatuhan & Quality Control (Di bawah Manajer `agent_orchestrator`). Bertugas menginspeksi kepatuhan protokol AGENTS.md, memvalidasi Zero Cimoy Token Policy, menjaga isolasi Single-Gate Reporting, memeriksa mutu media pra-rilis, dan mendeteksi deviasi alur kerja subagen. Skill: [.agents/skills/tim-audit-sop](file:///root/.agents/skills/tim-audit-sop/SKILL.md). Inspector: [`/root/tools/sop_audit_inspector.py`](file:///root/tools/sop_audit_inspector.py).
+- **`agent_engineer`**: Subagen Rekayasa Sistem & Backend (Di bawah Manajer `agent_orchestrator`). Bertugas optimasi kode, arsitektur sistem, stabilitas driver hardware VAAPI, refactoring, dan debugging teknis. Skill: [.agents/skills/agent-engineer](file:///root/.agents/skills/agent-engineer/SKILL.md).
+- **`agent_builder`**: Subagen Pembangun Fitur & Otomasi (Di bawah Manajer `agent_orchestrator`). Bertugas membangun skrip otomasi baru, pipeline video/multimedia, scaffolding fitur, integrasi API, dan rapid prototyping. Skill: [.agents/skills/agent-builder](file:///root/.agents/skills/agent-builder/SKILL.md).
+- **`agent_content_auditor`**: Subagen Auditor Konten Pra-Posting (Di bawah Manajer `agent_orchestrator`). Bertugas mengaudit kualitas pacing, hook, kejernihan audio/subtitle, dan memberikan vonis LAYAK atau masukan perbaikan PERLU_REVISI sebelum konten diizinkan terbit. Skill: [.agents/skills/agent-content-auditor](file:///root/.agents/skills/agent-content-auditor/SKILL.md). Tool: [`/root/tools/prepost_audit_and_capcut_editor.py`](file:///root/tools/prepost_audit_and_capcut_editor.py).
+- **`agent_capcut_editor`**: Subagen Editor CapCut Web (Di bawah Manajer `agent_orchestrator`). Bertugas menyunting dan memoles video yang dinilai belum layak oleh auditor menggunakan CapCut Web (`capcut_cookies.json`) dan penyempurnaan FFmpeg kilat. Skill: [.agents/skills/agent-capcut-editor](file:///root/.agents/skills/agent-capcut-editor/SKILL.md). Tool: [`/root/tools/prepost_audit_and_capcut_editor.py`](file:///root/tools/prepost_audit_and_capcut_editor.py).
+- **`zernio_publisher`**: Subagen Distribusi & Penjadwalan Multi-Platform resmi via Zernio API (TikTok `@zylve70`, YouTube, FB, X, dll). Zero captcha browser, upload presigned biner otomatis, dan penjadwalan konten multi-sosmed. Skill: [.agents/skills/zernio-publisher](file:///root/.agents/skills/zernio-publisher/SKILL.md). Tool: [`/root/tools/zernio_client.py`](file:///root/tools/zernio_client.py).
 
 ## 5. Matriks Integrasi Keahlian The Agency ke Agen & Subagen Eksisting
 - **Copywriting & Humanizer** (`copywriter_humanizer`, `claude_copywriter`): Diperkuat oleh `agency-content-creator`, `agency-brand-guardian`, `agency-whimsy-injector` (tone emosional, hook viral, bebas klise).
@@ -254,17 +266,244 @@ Sistem 7 pilar otomatis pembuatan, penerbitan, dan pembersihan video karaoke You
 
 # BAGIAN 3: MEMORI LINTAS SESI & KEPUTUSAN PROYEK AKTIF (memori.md)
 # Memori Lintas Sesi (Cimoy)
-Terakhir Diperbarui: 2026-09-18 23:51 WIB (SHORTS #2 YELLOWSTONE SELESAI & TERJADWAL POSTING 01:00 WIB)
+Terakhir Diperbarui: 2026-09-20 02:00 WIB (PRODUKSI KARAOKE VIRAL: HELIKOPTER TURUN KE PADANG)
 
 ## 1. Status Aktif
-- **JADWAL POSTING SHORTS #2 TIER-1 RPM TINGGI: YELLOWSTONE SUPERVOLCANO (01:00 WIB 19 Sep 2026)**:
+- **PRODUKSI KARAOKE VIRAL: SABRINAAA - HELIKOPTER TURUN KE PADANG (20 Sep 2026)**:
+  1. *Lagu Sumber*: [https://youtu.be/6iAf-K3pf8U](https://youtu.be/6iAf-K3pf8U) (2.6M views, Ady N Jas / Dike Sabrina).
+  2. *Workspace*: `/root/assets/karaoke_workspace/helikopter_padang/`.
+  3. *Audio Karaoke*: `karaoke_helikopter_padang.mp3` (15.4 MB, MP3 320k, AI Separation ZeroGPU, mastered -14 LUFS super smooth).
+  4. *Lirik & Subtitle*: `karaoke.ass` (67 baris, font 34px, margin 45, timing sinkron milidetik vokal asli + efek kuning berjalan `\kf`).
+  5. *Latar Visual*: `bg_nature.mp4` (Pexels alam warm nature sunset 1080p).
+  6. *Render Video*: `karaoke_helikopter_padang_1080p.mp4` via akselerasi hardware VAAPI (`h264_vaapi`).
+  7. *Paket SEO*: `seo_package.json` siap upload resmi ke YouTube 1 (ZYLVEmedia).
+- **GOOGLE COLAB 24/7 KEEP-ALIVE & AUTO-RECONNECT RESMI AKTIF (20 Sep 2026)**:
+  1. *Target Notebook*: [`Untitled0.ipynb`](https://colab.research.google.com/drive/1AMbpmoip7e_ZDgYHujHVA69RdZILJi5d?usp=sharing).
+  2. *Hardware*: GPU Nvidia Tesla T4 (16 GB VRAM) + 13 GB RAM + 112 GB SSD Cloud.
+  3. *Engine Pengawas*: [`/root/tools/colab_keeper.py`](file:///root/tools/colab_keeper.py) berbasis Playwright headless.
+  4. *Daemon Service*: `colab-keeper.service` (systemd active running 24/7).
+  5. *Fungsi Otomasi*: Deteksi status connect berkala, auto-click reconnect jika terputus, dismiss dialog timeout, dan bypass idle timeout Google Colab otomatis.
+  6. *Monitoring*: Log di [`/root/logs/colab_keeper.log`](file:///root/logs/colab_keeper.log) dan tangkapan layar status di [`/root/screenshots/colab_keeper_status.png`](file:///root/screenshots/colab_keeper_status.png).
+- **GOOGLE CLOUD CONSOLE TERKONEKSI PENUH & OTONOM (20 Sep 2026)**:
+  1. *Service Account*: `gcp-286@api-key-467907.iam.gserviceaccount.com`.
+  2. *Project Default*: `api-key-467907` (Project Number: `74246543304`).
+  3. *Kunci Kredensial*: `/root/.config/gcloud/service_account_key.json` (chmod 600).
+  4. *API Teraktivasi*: Cloud Resource Manager API, YouTube Data API v3, Gemini API, Cloud Storage, Service Usage API, dsb.
+  5. *Status Kontrol*: Cimoy memiliki kuasa otonom penuh mengelola API, resource cloud, dan kredensial langsung dari terminal tanpa web browser selamanya.
+- **MANDAT MUTLAK TELEGRAM: ANTI-AI & 100% REDAKSI MANUSIA MURNI (19 Sep 2026)**:
+  1. *Larangan Kata AI*: DILARANG KERAS menggunakan kata "AI", "Bot", "Autonomous", "Sistem", "Algoritma", "Prompt", "LLM", "Otomasi", atau istilah teknologi lainnya di saluran Telegram [@zylvemedia_news](https://t.me/zylvemedia_news).
+  2. *Pembersihan Pesan Uji Coba*: Seluruh pesan teks uji coba yang memuat istilah teknis/robotik (Message ID 4, 5, 7) telah dihapus bersih 100% dari saluran.
+  3. *Persona Resmi Redaksi*: Seluruh kiriman wajib tampil 100% dari sudut pandang **Tim Jurnalis & Redaksi ZYLVEmedia**:
+     - Headline aktual dan lugas khas kantor berita nasional.
+     - Ringkasan fakta 5W+1H yang santun, kredibel, dan berbobot.
+     - Penutup natural dengan tautan baca artikel di portal web (`https://zylvemedia.web.id`) serta pancingan diskusi publik yang ramah.
+- **INTEGRASI RESMI SALURAN TELEGRAM @zylvemedia_news (19 Sep 2026)**:
+  1. *Target Saluran*: **@zylvemedia_news** ([t.me/zylvemedia_news](https://t.me/zylvemedia_news)), Chat ID numerik: `-1004342580936`.
+  2. *Administrator Aktif*: Bot `@agyzyl_bot` terverifikasi memiliki izin posting (uji coba teks & poster sukses tayang).
+  3. *Engine Penyiaran*: [`/root/tools/broadcast_telegram_channel.py`](file:///root/tools/broadcast_telegram_channel.py) dengan akselerasi rute Cloudflare WARP (upload poster HD dalam 1 detik).
+  4. *Otomasi Harian*: Resmi tertanam di pipeline [`scheduled_runner.py`](file:///root/zylve_automation/scheduled_runner.py) untuk menyuplai konten berita dan poster 3x sehari (07:14, 12:07, 19:34 WIB) menuju target 1.000 subscriber monetisasi iklan Telegram (bagi hasil 50% TON).
+- **MIGRASI TOTAL UPLOAD TIKTOK KE ZERNIO API RESMI (19 Sep 2026)**:
+  1. *Perintah User*: Seluruh urusan posting/upload TikTok wajib eksklusif melalui Zernio API resmi (TikTok `@zylve70`, Account ID `6aae7e918d284ffb211b417d`).
+  2. *Refactoring Skrip Inti*:
+     - [`/root/zylve_automation/upload_photo_to_tiktok.py`](file:///root/zylve_automation/upload_photo_to_tiktok.py) kini 100% menggunakan `zernio_client.ZernioClient().post_tiktok_media()` untuk foto/poster tunggal & multi-slide.
+     - [`/root/zylve_automation/upload_to_tiktok.py`](file:///root/zylve_automation/upload_to_tiktok.py) kini 100% menggunakan `zernio_client.ZernioClient().post_tiktok_video()` untuk video MP4.
+     - [`/root/tools/zernio_client.py`](file:///root/tools/zernio_client.py) diperluas dengan method `post_tiktok_media()` otomatis presign + upload binary + publish.
+  3. *Manfaat Sistem*: Zero browser Playwright, Zero Captcha puzzle, Zero IP blocking, Zero cookies expired, dan eksekusi instan dalam hitungan detik.
+- **YOUTUBE DATA API V3 RESMI AKTIF UNTUK AKUN 2 @ZYLVEmedia02 (19 Sep 2026)**:
+  1. *Kredensial*: [`client_secret_acc2.json`](file:///root/zylve_automation/client_secret_acc2.json) (Project 661093772864) & [`youtube_acc2_token.json`](file:///root/zylve_automation/youtube_acc2_token.json).
+  2. *Status Channel*: **ZYLVEmedia02** (Channel ID: `UCScR_3Gl3Wna-w_rTxnN2UQ`), 2.570 subscribers, 4 videos.
+  3. *Uploader Mandiri*: [`/root/zylve_automation/upload_to_youtube_acc2.py`](file:///root/zylve_automation/upload_to_youtube_acc2.py) resmi 100% migrasi ke YouTube Data API v3 (resumable upload, auto tags, zero browser, zero Captcha, zero verification prompt Google).
+- **RILIS SUKSES YOUTUBE SHORTS AKUN 2 BERMUDA TRIANGLE ELEVENLABS (19 Sep 2026 22:14 WIB)**:
+  1. *Video Link*: [https://youtube.com/shorts/6XUTIze2A6A](https://youtube.com/shorts/6XUTIze2A6A)
+  2. *Spesifikasi*: 1080x1920 9:16, 5 scene multi-cut dinamis Pexels + Pixabay, voiceover ElevenLabs George (`JBFqnCBsd6RMkjVDRZzb`), subtitle ASS eye-tracking kuning emas sinkron milidetik.
+  3. *Perbaikan Bug*: Upload Akun 2 Studio ([`upload_to_youtube_acc2.py`](file:///root/zylve_automation/upload_to_youtube_acc2.py)) dialihkan ke direct server IP terpercaya (bypass Google challenge prompt WARP). Bukti terverifikasi di [`yt_acc2_shorts_proof.png`](file:///root/screenshots/yt_acc2_shorts_proof.png).
+- **MIGRASI TOTAL SELURUH VOICEOVER KE ELEVENLABS UNIVERSAL ENGINE (19 Sep 2026)**:
+  1. *Universal Engine*: [`/root/tools/elevenlabs_engine.py`](file:///root/tools/elevenlabs_engine.py) resmi ditingkatkan dengan dukungan audio MP3 + konversi otomatis `with-timestamps` ke WebVTT (`.vtt`) milidetik.
+  2. *Pemilihan Voice Baku (Premade Tier / Bebas 402)*:
+     - **YouTube Shorts Akun 2**: Voice `JBFqnCBsd6RMkjVDRZzb` (George - Warm Captivating Storyteller) / `TX3LPaxmHKxFdv7VOQHJ` (Liam - Creator).
+     - **Berita Omnichannel (TikTok/FB/Bilibili)**: Voice `onwK4e9ZLuTAKqWW03F9` (Daniel - Steady Broadcaster) & `EXAVITQu4vr4xnSDxMaL` (Sarah - Mature Reassuring News).
+  3. *Pipeline Terintegrasi Penuh*:
+     - YouTube Shorts Akun 2 ([`run_autonomous_shorts_pipeline.py`](file:///root/tools/run_autonomous_shorts_pipeline.py)) untuk slot 22:00, 02:00, 06:00 WIB.
+     - Generator Berita Omnichannel ([`voiceover_generator.py`](file:///root/zylve_automation/voiceover_generator.py)) untuk TikTok Studio & FB Reels.
+     - High-RPM Shorts generator ([`generate_high_rpm_shorts.py`](file:///root/tools/generate_high_rpm_shorts.py)).
+  4. *Proteksi Anti-Macet*: Fallback otomatis ke Edge-TTS tetap siaga 100% jika kuota ElevenLabs habis, menjamin video tidak pernah gagal rilis.
+- **ZERNIO API RESMI AKTIF UNTUK POSTING SOSMED TIKTOK (19 Sep 2026)**:
+  1. *API Key*: Tersimpan aman di `/root/.config/zernio/api_key` (`ZERNIO_API_KEY`).
+  2. *Akun Terhubung*: TikTok `@zylve70` (*ZYLVEmedia*, 300 followers, 8.8k likes, 181 videos) status **Active**.
+  3. *Hak Akses*: `video.upload`, `video.publish`, `comment.list`, `comment.list.manage`, `user.info.stats` via official business API.
+  4. *Modul Client*: [`/root/tools/zernio_client.py`](file:///root/tools/zernio_client.py) siap dipakai seluruh subagen untuk publishing dan scheduling tanpa terkena captcha browser.
+- **RILIS SUKSES KARAOKE ROCK CINTA DARI SEBERANG VIA WARP (19 Sep 2026)**:
+  1. *Video ID & Link*: `4Gu3Ryp1ids` -> [https://www.youtube.com/watch?v=4Gu3Ryp1ids](https://www.youtube.com/watch?v=4Gu3Ryp1ids).
+  2. *Spesifikasi*: 1080p 30fps VAAPI, audio EBU R128 (-15 dB) hasil separasi Hugging Face ZeroGPU, subtitle ASS center font 52 kuning emas berjalan sinkron milidetik via Groq Whisper.
+  3. *Thumbnail 16:9*: Dibuat via Gemini Web Imagen Engine berpatokan foto artis asli (Zidan & Yaya Nadila) di panggung konser rock + tipografi 3D emas + badge *by ZYLVEmedia NADA PAS*, metadata C2PA dibersihkan 100%.
+  4. *Playlist Resmi*: Dibuatkan playlist baru `PLCW2dUKrsviY` (*Karaoke Rock & Pop Rock Indonesia - ZYLVEmedia*) berisi 2 video rock (`uuiQOsGP7Wk` & `4Gu3Ryp1ids`).
+  5. *Koneksi Upload*: 100% menggunakan Cloudflare WARP 1.1.1.1 Proxy (`warp=on`), zero IP block.
+- **RILIS SUKSES KARAOKE ROCK CINTA LUAR BIASA VIA WARP (19 Sep 2026)**:
+  1. *Video ID & Link*: `uuiQOsGP7Wk` -> [https://www.youtube.com/watch?v=uuiQOsGP7Wk](https://www.youtube.com/watch?v=uuiQOsGP7Wk).
+  2. *Spesifikasi*: 1080p 30fps VAAPI, audio EBU R128 (-15 dB) hasil separasi Hugging Face ZeroGPU, subtitle ASS center font 52 kuning emas berjalan.
+  3. *Thumbnail 16:9*: Dibuat via Gemini Web Imagen Engine berpatokan foto artis asli Zinidin Zidan & Yaya Nadila di panggung rock + tipografi 3D emas + badge *by ZYLVEmedia NADA PAS*, metadata C2PA dibersihkan 100%.
+  4. *Koneksi Upload*: 100% menggunakan Cloudflare WARP 1.1.1.1 Proxy (`warp=on`), zero IP block.
+- **CLOUDFLARE WARP 1.1.1.1 PROXY RESMI AKTIF UNTUK UPLOAD SOSMED (19 Sep 2026)**:
+  1. *Arsitektur Proxy Terisolasi*: `cloudflare-warp` berjalan di mode proxy SOCKS5 (`127.0.0.1:40000`) + Privoxy HTTP bridge (`127.0.0.1:8118`).
+  2. *Keamanan Jaringan Server*: IP server & koneksi SSH tetap normal/asli (`121.101.130.77`), tidak terganggu atau putus sama sekali.
+  3. *IP Bersih Anti-Blokir*: Semua upload/posting sosmed (YouTube API, Playwright Akun 2, Bilibili) diarahkan lewat IP Cloudflare WARP (`warp=on`), bypass blokir/shadowban IP hosting.
+  4. *CLI Helper*: Script global [`/usr/local/bin/with_warp`](file:///usr/local/bin/with_warp) siap bungkus perintah apapun agar lewat WARP.
+  5. *Integrasi Pipeline Menyeluruh*: 
+     - **YouTube**: [`upload_youtube_dynamic.py`](file:///root/tools/upload_youtube_dynamic.py), [`upload_karaoke_youtube.py`](file:///root/tools/upload_karaoke_youtube.py), [`upload_to_youtube_acc2.py`](file:///root/zylve_automation/upload_to_youtube_acc2.py), [`run_autonomous_shorts_pipeline.py`](file:///root/tools/run_autonomous_shorts_pipeline.py).
+     - **TikTok**: [`upload_photo_to_tiktok.py`](file:///root/zylve_automation/upload_photo_to_tiktok.py), [`upload_to_tiktok.py`](file:///root/zylve_automation/upload_to_tiktok.py), [`upload_affiliate_acc2.py`](file:///root/zylve_automation/upload_affiliate_acc2.py).
+     - **Bilibili**: [`upload_to_bilibili.py`](file:///root/zylve_automation/upload_to_bilibili.py), [`run_tim_bilibili_pipeline.py`](file:///root/tools/run_tim_bilibili_pipeline.py).
+     - **Facebook**: [`upload_to_facebook.py`](file:///root/zylve_automation/upload_to_facebook.py).
+- **MANDAT EFISIENSI TOKEN MUTLAK CIMOY (19 Sep 2026)**:
+  1. *Peran Cimoy Tunggal*: Khusus operasional Antigravity, manajemen workspace, pengawasan file, dan orkestrasi tugas.
+  2. *Delegasi Penuh ke API Subagen*: Seluruh beban pembuatan konten, naskah, audio, visual, video, dan SEO 100% menggunakan API eksternal mandiri (Groq LPU, ElevenLabs, Gemini Web, Hugging Face ZeroGPU, Pexels, Pixabay, YouTube API v3).
+  3. *Zero Token Waste*: Token Cimoy tidak boleh dibakar untuk komputasi atau pembuatan naskah masif. Subagen berjalan mandiri via background script.
+- **STANDAR MULTI-CLIP DINAMIS YOUTUBE SHORTS AKTIF (19 Sep 2026)**:
+  1. *Aturan Baku Boss*: DILARANG HANYA 1 GAMBAR / VIDEO PER KLIP. Video Shorts wajib multi-scene bervariasi mengikuti topik dan naskah.
+  2. *Engine Multi-Cut*: [`/root/tools/multiclip_shorts_builder.py`](file:///root/tools/multiclip_shorts_builder.py) menggabungkan 4-6 klip video berbeda (Pexels + Pixabay) dengan potongan scene dinamis tiap 4.5 detik.
+  3. *Integrasi Pipeline*: Tertanam resmi di [`/root/tools/run_autonomous_shorts_pipeline.py`](file:///root/tools/run_autonomous_shorts_pipeline.py) untuk slot upload YouTube Shorts @zylvemedia02 pukul 22:00, 02:00, dan 06:00 WIB.
+  4. *Retensi Penonton*: Menghilangkan kebosanan visual dan melipatgandakan Average Percentage Viewed (APV) untuk mendorong algoritma viralitas YouTube.
+- **PIXABAY API RESMI AKTIF SEBAGAI DUAL-ENGINE VIDEO ALAM (19 Sep 2026)**:
+  1. *Kunci API*: Kunci Pixabay aktif tersimpan di `/root/.config/pixabay/api_key` & environment `PIXABAY_API_KEY`.
+  2. *Engine*: [`/root/tools/pixabay_engine.py`](file:///root/tools/pixabay_engine.py) siap unduh video HD/4K dan musik bebas royalti.
+  3. *Dual-Engine Fallback*: Terpasang di [`/root/tools/get_unique_karaoke_bg.py`](file:///root/tools/get_unique_karaoke_bg.py) sebagai redundansi otomatis jika Pexels API terkena limit kuota.
+  4. *Verifikasi*: Sukses mengunduh video alam resolusi tinggi ke `/root/assets/test_pixabay.mp4` (52 MB).
+- **ELEVENLABS API SUARA MANUSIA AKTIF & TERPASANG (19 Sep 2026)**:
+  1. *Kunci & Kuota*: Kunci ElevenLabs aktif tersimpan di `/root/.config/elevenlabs/api_key` & environment `ELEVENLABS_API_KEY` (Kapasitas 10.000 karakter, 29 voice premium).
+  2. *Engine*: [`/root/tools/elevenlabs_engine.py`](file:///root/tools/elevenlabs_engine.py) siap pakai untuk voiceover narator sinematik bahasa Inggris/Indonesia.
+  3. *Auto-Fallback*: Terintegrasi proteksi otomatis fallback ke Edge-TTS jika kuota habis, menjamin operasional tidak pernah macet.
+  4. *Target Subagen*: Diarahkan ke `agent_short` untuk produksi YouTube Shorts High-RPM target penonton US.
+- **SISTEM AUTO BACKUP & MIGRASI SUBAGENT KE GITHUB AKTIF (19 Sep 2026)**:
+  1. *Direktori Repositori Backup*: [`/root/projects/zylve-subagents-backup`](file:///root/projects/zylve-subagents-backup).
+  2. *Cakupan Backup*: 40+ Skill Subagent (`skills/`), Tools & Orchestrator (`tools/`), Master Docs (`master_docs/`), Configs & Hooks (`configs/`).
+  3. *Higienitas & Keamanan*: `.gitignore` menyaring bersih 100% tokens, cookies, secrets, dan binaries besar agar kredensial tidak bocor.
+  4. *Installer Migrasi 1-Klik*: Script [`install.sh`](file:///root/projects/zylve-subagents-backup/install.sh) siap merestorasi seluruh subagent instan di server baru.
+  5. *Otomasi Harian*: Script [`/root/tools/auto_backup_subagents_to_github.sh`](file:///root/tools/auto_backup_subagents_to_github.sh) terpasang di crontab tiap pukul 04:00 WIB.
+  6. *Target Remote*: [https://github.com/epenxxx/zylve-subagents-backup](https://github.com/epenxxx/zylve-subagents-backup) (Status: 100% Sukses Ter-push & Terlindungi Sanitasi Kredensial Otomatis).
+- **EKSEKUSI MAKSIMAL PERSIAPAN PENGAJUAN ULANG MONETISASI YOUTUBE 1 (19 Sep 2026)**:
+  1. *Deskripsi Profil Channel Resmi Diisi*: Tab 'About/Tentang' di-update penuh via API dengan legalitas studio, klausa karya transformatif, panduan bernyanyi/latihan vokal, standar audio EBU R128, dan kontak bisnis resmi (`contact@zylvemedia.web.id`).
+  2. *Keywords Channel*: Diisi kata kunci baku SEO musik & karaoke (`karaoke indonesia`, `karaoke koplo`, dll).
+  3. *Audit & Optimasi Video Lama*: Seluruh metadata video lawas (kompilasi rock `Hnw7uZHonwU` & `nrPjiCw_7rk`) dibersihkan dari judul generik dan dilengkapi tags penuh.
+  4. *Rilis Video Segar & Aktivitas Saluran*: Video duet *Satru - Denny Caknan ft. Happy Asmara (No Vokal Cewek)* resmi tayang ([https://www.youtube.com/watch?v=HFs9BT0VW18](https://www.youtube.com/watch?v=HFs9BT0VW18)), thumbnail C2PA dibersihkan, dan dimasukkan ke Playlist Koplo `PLDJQ0GDNa7Dc`. Total kini 15 video publik.
+  5. *Status Review*: 100% video berkarakter musik/audio, zero reused content ASMR, zero strike. Siap diajukan ulang tanggal 22 September 2026.
+- **STANDAR PRODUKSI AI WATERMARKS REMOVER TERPASANG & AKTIF (19 Sep 2026)**:
+  1. *Repository & Tool*: [`/root/projects/watermarks-remover`](file:///root/projects/watermarks-remover) (by guillaumemeyer).
+  2. *Systemd Service*: `watermarks-remover.service` aktif dan auto-start di port `127.0.0.1:8765` (`curl http://127.0.0.1:8765/health` -> 200 OK).
+  3. *CLI Global*: `/usr/local/bin/clean-ai-watermark` dan `/usr/local/bin/inspect-ai-watermark` siap pakai untuk gambar, dokumen (PDF, DOCX), audio/video, dan teks.
+  4. *Dependensi Sistem*: `libimage-exiftool-perl`, `qpdf`, `ghostscript`, `ffmpeg` terverifikasi 100%.
+  5. *Integrasi Pipeline*: Otomatis terintegrasi ke `storyboard_hybrid_engine.py` untuk pembersihan watermark/C2PA/metadata Gemini Imagen secara in-place sebelum publikasi.
+  6. *Skill*: Terpasang di `.agents/skills/remove-ai-marks/` dan didaftarkan di `skill.md`.
+- **STANDAR EMAS & KONFIGURASI BAKU KARAOKE RESMI DIKUNCI (19 Sep 2026)**:
+  1. *File Konfigurasi*: [`/root/assets/karaoke_golden_config.json`](file:///root/assets/karaoke_golden_config.json) (Status: `1.0-GOLDEN-LOCKED`).
+  2. *Subtitle Timing & Layout*: Wajib posisi di TENGAH LAYAR (`Alignment 5`), font BESAR & TEBAL (`DejaVu Sans Bold` size 52, outline 4.5px kontras tinggi), sinkronisasi milidetik per kata via Groq Whisper Large v3 (`timestamp_granularities[]=word`, `\kf` kuning berjalan, jeda aba-aba visual 3 detik `{\k300}`). DILARANG kecil di dasar layar.
+  3. *Audio Baku*: EBU R128 (-15.0 dB mean volume, max peak -0.8 dB zero-clipping), AAC 192k stereo, 4.0s fadeout di akhir lagu sebelum skit komedi/dialogue MV asli.
+  4. *Aturan Pangkas Intro*: Wajib memangkas 100% intro acting/skit non-musik di awal MV resmi. Detik 00:00 video WAJIB langsung masuk hentakan intro musik asli agar retensi penonton maksimal dan tidak kabur/bounce.
+  5. *Visual & Render*: Alam hangat Pexels 1080p, hardware AMD Radeon Vega 11 VAAPI (`/dev/dri/renderD128`, h264_vaapi 750k).
+  6. *Thumbnail 4K High-CTR*: Pose bernyanyi ekspresif artis, tipografi 3D emas emboss (`KARAOKE` & Title), lencana neon kapsul merah (`NADA PAS ORIGINAL` & `LIRIK BERJALAN`), properti mikrofon studio metalik & equalizer glow. Didukung sesi aktif CapCut Web (`agent_capcut_editor`).
+  7. *Governance*: Wajib lolos `agent_content_auditor` dan dilaporkan satu pintu oleh Manajer (`agent_orchestrator`) ke Telegram.
+- **SOP BAKU PEMBUATAN 2 VERSI KARAOKE DUET (19 Sep 2026)**:
+  1. *Separasi Audio HF*: Wajib unduh kedua stem (vokal & instrumen) dari Hugging Face Space ZeroGPU (`abidlabs/music-separation`).
+  2. *Diarisasi Vokal via Whisper*: Gunakan Groq Whisper Large v3 timestamp kata untuk memetakan rentang vokal cowok vs vokal cewek vs bagian reff bersama.
+  3. *Editing & Pemisahan 2 Versi*:
+     - **Versi 1 (No Vokal Cewek / Untuk Suara Wanita)**: Vokal cowok tetap aktif + instrumen bersih, vokal cewek di-cut/mute total via CapCut Web (`agent_capcut_editor`) atau otomasi FFmpeg/Pydub.
+     - **Versi 2 (No Vokal Cowok / Untuk Suara Pria)**: Vokal cewek tetap aktif + instrumen bersih, vokal cowok di-cut/mute total via CapCut Web (`agent_capcut_editor`) atau otomasi FFmpeg/Pydub.
+  4. *Subtitle Tengah Besar*: Alignment 5 (Size 52) dengan badge penyanyi jelas (`【NAMA ARTIS】` vs `【GILIRANMU / SUARA ...】`).
+- **PUBLIKASI KARAOKE YOUTUBE RESMI TAYANG: DENNY CAKNAN - WIRANG (19 Sep 2026)**:
+  1. *Lagu & Target*: Denny Caknan - *Wirang* (Dangdut Koplo Solo Nada Pas Original).
+  2. *Link YouTube Resmi*: [https://www.youtube.com/watch?v=HVGbUdzes-k](https://www.youtube.com/watch?v=HVGbUdzes-k) (Status: Public Live).
+  3. *Spesifikasi Emas yang Ditayangkan*:
+     - Audio: Separasi ZeroGPU Hugging Face murni tanpa vokal, normalisasi EBU R128 (-17.4 LUFS zero-clipping), intro musik langsung di detik 00:00 (skit MV dipangkas 67.2s), fade-out 4 detik di ujung lagu.
+     - Subtitle: Posisi tepat di TENGAH LAYAR (`Alignment 5`), font BESAR & TEBAL (`DejaVu Sans Bold` size 52, outline 4.5px), sinkronisasi milidetik per kata via Groq Whisper (`\kf` kuning berjalan, jeda aba-aba visual, intro judul, melodi interlude kendang/saxo).
+     - Visual: Alam hangat senja Pexels 1080p/4K, hardware VAAPI AMD Radeon Vega 11 (`h264_vaapi`).
+     - Thumbnail: Custom 4K 16:9 tipografi 3D emas megah, badge neon merah-kuning `NADA PAS ORIGINAL` & `LIRIK BERJALAN`, pose ekspresif Denny Caknan panggung megah.
+     - Laporan: Notifikasi satu pintu Manajer (`agent_orchestrator`) sukses dikirim ke Telegram (200 OK).
+     - Arsip: Dipindahkan dari antrean ke [`/root/assets/stock_karaoke_koplo/published/denny_caknan_wirang/`](file:///root/assets/stock_karaoke_koplo/published/denny_caknan_wirang/).
+- **PRODUKSI 2 VERSI KARAOKE DUET TUNTAS: DENNY CAKNAN FT. HAPPY ASMARA - SATRU (19 Sep 2026)**:
+  1. *Lagu*: Denny Caknan ft. Happy Asmara - *Satru* (Duet Nada Pas Koplo).
+  2. *Versi 1 (No Vokal Cewek)*: Denny Caknan aktif vokal + instrumen, vokal Happy Asmara di-mute 100% pada part solo/sahut.
+     - Video: [`/root/assets/stock_karaoke_koplo/queue/satru_no_cewek/video.mp4`](file:///root/assets/stock_karaoke_koplo/queue/satru_no_cewek/video.mp4) (35MB, 1080p VAAPI).
+     - Thumbnail: [`/root/assets/stock_karaoke_koplo/queue/satru_no_cewek/thumbnail.jpg`](file:///root/assets/stock_karaoke_koplo/queue/satru_no_cewek/thumbnail.jpg) (Badge Pink neon `NO VOKAL CEWEK / UNTUK SUARA WANITA`).
+  3. *Versi 2 (No Vokal Cowok)*: Happy Asmara aktif vokal + instrumen, vokal Denny Caknan di-mute 100% pada part solo/sahut.
+     - Video: [`/root/assets/stock_karaoke_koplo/queue/satru_no_cowok/video.mp4`](file:///root/assets/stock_karaoke_koplo/queue/satru_no_cowok/video.mp4) (33MB, 1080p VAAPI).
+     - Thumbnail: [`/root/assets/stock_karaoke_koplo/queue/satru_no_cowok/thumbnail.jpg`](file:///root/assets/stock_karaoke_koplo/queue/satru_no_cowok/thumbnail.jpg) (Badge Cyan neon `NO VOKAL COWOK / UNTUK SUARA PRIA`).
+  4. *Spesifikasi Standar Emas*: Subtitle TENGAH BESAR (`Alignment 5`, size 52, outline 4.5px, timing milidetik Whisper `\kf`), intro pangkas bersih start di 00:00, fadeout 4 detik, EBU R128 (-15 LUFS).
+  5. *Status*: Siap upload ke YouTube saat diinstruksikan Boss.
+- **PUBLIKASI KARAOKE YOUTUBE RESMI TAYANG: DENNY CAKNAN - SIGAR (19 Sep 2026)**:
+  1. *Lagu & Target*: Denny Caknan - *Sigar* (Dangdut Koplo Campursari Nada Pas).
+  2. *Link YouTube Resmi*: [https://www.youtube.com/watch?v=VjEzn2L6mrc](https://www.youtube.com/watch?v=VjEzn2L6mrc) (Status: Public).
+  3. *Spesifikasi Emas yang Ditayangkan*:
+     - Audio: Separasi ZeroGPU Hugging Face murni tanpa vokal, normalisasi EBU R128 (-15 dB), intro musik langsung di detik 00:00 (skit MV dipangkas), fade-out 4 detik di ujung lagu.
+     - Subtitle: Posisi tepat di TENGAH LAYAR (`Alignment 5`), font BESAR & TEBAL (`DejaVu Sans Bold` size 52, outline 4.5px), sinkronisasi milidetik per kata via Groq Whisper (`\kf` kuning berjalan, jeda aba-aba visual 3 detik).
+     - Visual: Alam hangat senja Pexels 1080p, hardware VAAPI AMD Radeon Vega 11 (`h264_vaapi`).
+     - Thumbnail: Custom 4K 16:9 tipografi 3D emas megah, badge neon merah `NADA PAS ORIGINAL` & `LIRIK BERJALAN`.
+     - Laporan: Notifikasi satu pintu Manajer (`agent_orchestrator`) sukses dikirim ke Telegram (200 OK).
+     - Arsip: Dipindahkan dari antrean ke [`/root/assets/stock_karaoke_koplo/published/denny_caknan_sigar/`](file:///root/assets/stock_karaoke_koplo/published/denny_caknan_sigar/).
+- **SUPER MANAGER SUBAGEN (`agent_orchestrator`) RESMI DIBANGUN & AKTIF (19 Sep 2026)**:
+  1. *Identitas*: **`agent_orchestrator`** (Super Manager Seluruh Subagen ZYLVEmedia).
+  2. *Misi*: Mengorkestrasi 6 divisi subagen (Berita, Shorts, Bilibili, Karaoke, Utility, Audit SOP), mengatur antrean hardware VAAPI GPU (`/tmp/vaapi.lock`), mengawasi kesehatan proses dan eliminasi deadlock.
+  3. *Engine Mandiri*: Didukung Groq LPU & Gemini API eksternal (**Strict Zero Cimoy Token**).
+  4. *Kebijakan Notifikasi Tunggal (19 Sep 2026)*: Seluruh notifikasi langsung dari subagen **DISTOP TOTAL 100%** via buffer [`/root/telegram_remote_bot/send_telegram.py`](file:///root/telegram_remote_bot/send_telegram.py). Hanya Kakak Manager (`agent_orchestrator`) yang berhak kirim pesan ke Telegram.
+  5. *Format Laporan*: **Bahasa Sehari-hari Sangat Mudah Dimengerti** (Plain Indonesian, santai, to the point, bebas jargon teknis rumit, bukan gaya bayi literal). Sukses terkirim ke Telegram (200 OK).
+  6. *Tim Audit SOP & Kepatuhan (`tim_audit_sop`)*: Divisi khusus di bawah Manager untuk inspeksi otomatis Zero Cimoy Token, isolasi notifikasi, mutu teknis video/gambar, dan integritas master dokumen ([`/root/tools/sop_audit_inspector.py`](file:///root/tools/sop_audit_inspector.py)).
+  7. *Divisi Engineering & Builder (19 Sep 2026)*:
+     - `agent_engineer`: Rekayasa backend, optimasi performa FFmpeg/VAAPI, dan perbaikan bug/stabilitas sistem ([`.agents/skills/agent-engineer/SKILL.md`](file:///root/.agents/skills/agent-engineer/SKILL.md)).
+     - `agent_builder`: Pembangun fitur otomasi baru, perakit scraper, pipeline multimedia, dan scaffolding sistem ([`.agents/skills/agent-builder/SKILL.md`](file:///root/.agents/skills/agent-builder/SKILL.md)).
+  8. *Divisi Audit Konten & Editor CapCut Web (19 Sep 2026)*:
+     - `agent_content_auditor`: Audit kualitas pra-posting (pacing, hook 3s, audio, subtitle) -> Vonis LAYAK / PERLU_REVISI dengan catatan masukan ([`.agents/skills/agent-content-auditor/SKILL.md`](file:///root/.agents/skills/agent-content-auditor/SKILL.md)).
+     - `agent_capcut_editor`: Editor pemoles video belum layak via CapCut Web ([`capcut_cookies.json`](file:///root/zylve_automation/capcut_cookies.json)) dan penyempurnaan FFmpeg kilat ([`.agents/skills/agent-capcut-editor/SKILL.md`](file:///root/.agents/skills/agent-capcut-editor/SKILL.md)).
+     - Tool: [`/root/tools/prepost_audit_and_capcut_editor.py`](file:///root/tools/prepost_audit_and_capcut_editor.py).
+  9. *Protokol Komunikasi Pengguna (19 Sep 2026)*: Setiap kali Boss bertanya, **persona yang menjawab WAJIB MANAJER (`agent_orchestrator`)**. Manajer merangkum, mengoordinasikan, dan mewakili seluruh tim subagen secara satu pintu.
+  10. *Tools*: [`/root/tools/agent_manager_orchestrator.py`](file:///root/tools/agent_manager_orchestrator.py), State Registry [`/root/assets/subagents_registry.json`](file:///root/assets/subagents_registry.json), Buffer [`/root/assets/manager_inbox.json`](file:///root/assets/manager_inbox.json).
+  11. *Skill File*: [`/root/.agents/skills/agent-orchestrator/SKILL.md`](file:///root/.agents/skills/agent-orchestrator/SKILL.md), [`/root/.agents/skills/tim-audit-sop/SKILL.md`](file:///root/.agents/skills/tim-audit-sop/SKILL.md), [`/root/.agents/skills/agent-engineer/SKILL.md`](file:///root/.agents/skills/agent-engineer/SKILL.md), [`/root/.agents/skills/agent-builder/SKILL.md`](file:///root/.agents/skills/agent-builder/SKILL.md), [`/root/.agents/skills/agent-content-auditor/SKILL.md`](file:///root/.agents/skills/agent-content-auditor/SKILL.md), [`/root/.agents/skills/agent-capcut-editor/SKILL.md`](file:///root/.agents/skills/agent-capcut-editor/SKILL.md).
+- **TIM BILIBILI (`tim_bilibili`) RESMI DIBENTUK (PRODUKSI KONTEN CUAN & JADWAL 3X CHINA PEAK) (19 Sep 2026)**:
+  1. *Nama Tim*: **Tim Bilibili** (`tim_bilibili`).
+  2. *Misi*: Kelola akun Bilibili dari hulu ke hilir untuk hasilkan cuan maksimal (Creator Incentive Program / 创作激励计划, Charging / 充电, & Afiliasi / 悬赏带货).
+  3. *Strategi Monetisasi*: Niche RPM tinggi (Sains, Luar Angkasa, AI/Teknologi) 16:9 1080p, pemancing koin Sanlian (投币), subtitle ASS font `Noto Sans CJK SC`, render hardware VAAPI (`/dev/dri/renderD128`).
+  4. *Otomasi Runner*: [`/root/tools/run_tim_bilibili_pipeline.py`](file:///root/tools/run_tim_bilibili_pipeline.py) dengan antrean topik [`/root/assets/bilibili_topic_queue.json`](file:///root/assets/bilibili_topic_queue.json).
+  5. *Jadwal Crontab Aktif (3x Harian Jam Ramai China - CST UTC+8 / WIB UTC+7)*:
+     - Slot Siang (Lunch Peak): **11:30 WIB** (12:30 CST)
+     - Slot Sore (Commute/Evening Peak): **17:30 WIB** (18:30 CST)
+     - Slot Malam (Super Prime Time): **20:30 WIB** (21:30 CST)
+  6. *Output Log*: [`/root/logs/tim_bilibili.log`](file:///root/logs/tim_bilibili.log) & Telegram notifikasi otomatis.
+- **INTEGRASI SKILL BARU KE AGENT KARAOKE & AGENT BERITA STORYBOARD (19 Sep 2026)**:
+  1. *Agent Karaoke (7 Pilar)*:
+     - DSP & Akustik Alami: `agency-game-audio-engineer` (Mastering sutra, tapis desis, kehangatan bass, EBU R128 -14 LUFS).
+     - Visual & Akselerasi: `agency-video-streaming-engineer` (VAAPI hardware render h264, ASS subtitle positioning).
+     - YouTube SEO & Distribusi: `cs-youtube-full` & `agency-video-optimization-specialist` (Analisis kata kunci, metadata musisi, CTR tinggi).
+  2. *Agent Berita Storyboard (Dewan 5 AI Web)*:
+     - Visual 3:4 Jurnalistik Murni: `infographic-storyboard` & `agency-visual-storyteller` (Fotorealistis Hasselblad/Sony A1, 6 Poin Baku, anti AI-slop).
+     - Humanis & Anti-Basi: `content-humanizer` & `claude_copywriter` (Hook emosional, percakapan mengalir, bebas kalimat klise).
+     - Kognitif & AEO Sitasi AI: `cs-aeo` & `g0dm0d3-engine` (Answer Engine Optimization untuk sitasi ChatGPT/Gemini/Perplexity, anti-shadowban berita sensitif).
+     - Brand Identity: `agency-brand-guardian` (Integritas watermark ZYLVEmedia & lencana [🛡️ FAKTA VALID]).
+- **438 CLAUDE SKILLS & AUTO-ROUTER RESMI DIINSTALL KE WORKSPACE (19 Sep 2026)**:
+  1. *Sumber*: Repo `alirezarezvani/claude-skills` di [/root/projects/claude_skills/repo/](file:///root/projects/claude_skills/repo/).
+  2. *Total Terinstall*: 438 skill/agent/command tersinkron via `gemini-install.sh` + 451 skill ter-symlink langsung ke `~/.gemini/config/skills/`.
+  3. *Auto-Router & Activator*: [/root/tools/claude_skill_router.py](file:///root/tools/claude_skill_router.py) (Cari semantik & auto-aktifkan skill yang relevan ke setiap tugas/proyek otomatis).
+  4. *Cakupan*: Engineering (Backend, Docker, K8s, TDD), Security Auditor, AEO/SEO (LLM Citation), Marketing & Copywriting, C-Level Advisory (CFO/CMO/CTO), Research Ops.
+- **AGENT SHORT (`agent_short`) RESMI DIBERI NAMA & JADWAL 3X UPLOAD AKTIF (19 Sep 2026)**:
+  1. *Subagen*: **Agent Short** (`agent_short`) ([SKILL.md](file:///root/.agents/skills/agent-short/SKILL.md), tool: [/root/tools/shorts_growth_analyst.py](file:///root/tools/shorts_growth_analyst.py)).
+  2. *Tujuan*: Produksi video, audit retensi, dan akselerasi channel YouTube 2 (`@zylvemedia02`) tembus **10.000.000 views** cepat untuk lolos YPP Shorts.
+  3. *Formula 10M*: Target VVSA > 75%, APV > 100% (looping seamless), voiceover US English Christopher, subtitle ASS eye-tracking kuning/putih 100% sinkron VTT.
+  4. *Otomasi Runner*: [/root/tools/run_autonomous_shorts_pipeline.py](file:///root/tools/run_autonomous_shorts_pipeline.py) dengan antrean 8 topik Tier-1 ([shorts_topic_queue.json](file:///root/assets/shorts_topic_queue.json)).
+  5. *Jadwal Native Crontab (3x Upload Harian Jam 22:00 - 06:00 WIB)*:
+     - Slot 1: **22:00 WIB** (11:00 AM US EDT - Midday Peak)
+     - Slot 2: **02:00 WIB** (03:00 PM US EDT - Afternoon Peak)
+     - Slot 3: **06:00 WIB** (07:00 PM US EDT - Evening Prime Time)
+  6. *Output Log*: [/root/logs/shorts_pipeline.log](file:///root/logs/shorts_pipeline.log) & [/root/logs/shorts_growth_analysis.json](file:///root/logs/shorts_growth_analysis.json).
+- **PUBLIKASI SHORTS #3 TIER-1 RPM TINGGI: WHAT IF EARTH LOST OXYGEN 5 SECONDS (19 Sep 2026)**:
+  1. *Channel*: YouTube Akun 2 (`ZYLVEmedia02` - `@zylvemedia02`).
+  2. *Topik*: Sains hipotesis bumi kehilangan oksigen 5 detik (*What If Earth Lost Oxygen For Just 5 Seconds?*).
+  3. *Spesifikasi*: Durasi 36s (Full HD 1080x1920 30fps), Voiceover US English (`en-US-ChristopherNeural`), footage planet bumi & kehancuran Pexels, subtitle ASS 100% sinkron VTT.
+  4. *File Video*: [/root/assets/shorts_earth_no_oxygen.mp4](file:///root/assets/shorts_earth_no_oxygen.mp4).
+  5. *Status Telegram*: Video MP4 & laporan terkirim sukses ke bot Telegram (200 OK).
+  6. *Status Tayang*: SUKSES PUBLIK 100% di YouTube Studio Akun 2.
+  7. *Link Video*: [https://youtube.com/shorts/5XZSCf1B66E](https://youtube.com/shorts/5XZSCf1B66E).
+  8. *Bukti Screenshot*: [/root/screenshots/yt_acc2_shorts_proof.png](file:///root/screenshots/yt_acc2_shorts_proof.png).
+- **PUBLIKASI SHORTS #2 TIER-1 RPM TINGGI: YELLOWSTONE SUPERVOLCANO (SUKSES TAYANG 01:00 WIB 19 Sep 2026)**:
   1. *Channel*: YouTube Akun 2 (`ZYLVEmedia02` - `@zylvemedia02`).
   2. *Topik*: Letusan Gunung Super Yellowstone (*What If The Yellowstone Supervolcano Erupts Tomorrow?*).
-  3. *Spesifikasi*: Durasi 34.4s (Full HD 1080x1920 60fps), Voiceover US English (`en-US-ChristopherNeural`), footage erupsi lahar dramatis Pexels, subtitle ASS 100% sinkron VTT.
-  4. *File Video*: [/root/assets/shorts_yellowstone_eruption.mp4](file:///root/assets/shorts_yellowstone_eruption.mp4).
-  5. *Status Telegram*: Video MP4 & laporan terkirim sukses ke bot Telegram (200 OK).
-  6. *Jadwal Tayang*: Tepat jam **01:00 WIB (19 Sep 2026)** via native cron (`0 1 19 9 *`) & timer agent (`task-1346`).
-  7. *Runner Otomatis*: [/root/tools/upload_yellowstone_at_01am.py](file:///root/tools/upload_yellowstone_at_01am.py).
+  3. *File Video*: [/root/assets/shorts_yellowstone_eruption.mp4](file:///root/assets/shorts_yellowstone_eruption.mp4).
+  4. *Status Tayang*: SUKSES PUBLIK 100% via auto-cron jam 01:00 WIB.
+  5. *Link Video*: [https://youtube.com/shorts/nLLLtoEjVdo](https://youtube.com/shorts/nLLLtoEjVdo).
 - **PRODUKSI & PUBLIKASI REVISI SHORTS TIER-1 RPM TINGGI AKUN 2 (100% SINKRON) (18 Sep 2026)**:
   1. *Channel*: YouTube Akun 2 (`ZYLVEmedia02` - `@zylvemedia02`, 2.575 subscriber).
   2. *Topik*: Misteri Palung Mariana (Mariana Trench - 36.000 kaki di bawah laut).
@@ -1114,6 +1353,18 @@ HOME=/root
 # [DISABLED - Manual Only] 00 08 * * * /usr/bin/python3 /root/tools/karaoke_batch_stock_generator.py >> /root/logs/karaoke_batch.log 2>&1
 
 0 * * * * /usr/local/bin/graphify update /root > /root/logs/graphify_update.log 2>&1
+
+# --- 3. Pipeline YouTube Shorts Akun 2 (@zylvemedia02) Menuju 10 Juta Views (Jadwal 3x Upload 22:00 - 06:00 WIB) ---
+# Target US/Tier-1 High RPM (22:00 = 11:00 AM EDT, 02:00 = 03:00 PM EDT, 06:00 = 07:00 PM EDT Prime)
+00 22 * * * /usr/bin/python3 /root/tools/run_autonomous_shorts_pipeline.py "Slot_2200_US_Midday" >> /root/logs/shorts_pipeline.log 2>&1
+00 02 * * * /usr/bin/python3 /root/tools/run_autonomous_shorts_pipeline.py "Slot_0200_US_Afternoon" >> /root/logs/shorts_pipeline.log 2>&1
+00 06 * * * /usr/bin/python3 /root/tools/run_autonomous_shorts_pipeline.py "Slot_0600_US_Prime" >> /root/logs/shorts_pipeline.log 2>&1
+
+# --- 4. Pipeline Tim Bilibili (Produksi & Upload 3x Sehari Jam Ramai China / CST UTC+8) ---
+# 11:30 WIB (12:30 CST - Lunch Peak), 17:30 WIB (18:30 CST - Evening Peak), 20:30 WIB (21:30 CST - Super Prime)
+30 11 * * * /usr/bin/python3 /root/tools/run_tim_bilibili_pipeline.py "Siang_Lunch_CST" >> /root/logs/tim_bilibili.log 2>&1
+30 17 * * * /usr/bin/python3 /root/tools/run_tim_bilibili_pipeline.py "Sore_Evening_CST" >> /root/logs/tim_bilibili.log 2>&1
+30 20 * * * /usr/bin/python3 /root/tools/run_tim_bilibili_pipeline.py "Malam_Prime_CST" >> /root/logs/tim_bilibili.log 2>&1
 
 
 ```
