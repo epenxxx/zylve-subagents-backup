@@ -56,6 +56,16 @@ def download_pexels_nature_bg(query: str = "nature sunset landscape") -> str:
                 return out_path
     except Exception as e:
         print(f"[!] Error unduh Pexels API: {e}")
+    
+    # Fallback ke Pixabay API jika Pexels gagal
+    print("[*] Mencoba download cadangan via Pixabay API...")
+    try:
+        from pixabay_engine import download_video
+        import time
+        out_path = os.path.join(BG_DIR, f"nature_warm_pixabay_{int(time.time())}.mp4")
+        return download_video(query=query, output_path=out_path)
+    except Exception as e2:
+        print(f"[!] Error unduh Pixabay API: {e2}")
     return None
 
 def get_next_unique_background(song_title=""):
