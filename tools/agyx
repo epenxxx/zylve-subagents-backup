@@ -1,0 +1,71 @@
+#!/bin/bash
+# agyx - wrapper agy anti-pelupa + auto-save (Cimoy)
+# Pakai: agyx "pertanyaan lu"
+# Kerja: suntik konteks memori + simpan transkrip otomatis ke /root/logs/agy/
+set -u
+AGY=/root/.local/bin/agy
+MEM=/root/memori.md
+AGENTS=/root/AGENTS.md
+SKILL=/root/skill.md
+LOGDIR=/root/logs/agy
+mkdir -p "$LOGDIR"
+
+# continuity: 3 sesi terakhir ikut disuntik biar nyambung
+RECENT=""
+for f in $(ls -t "$LOGDIR"/*.md 2>/dev/null | head -n 3); do
+  RECENT="$RECENT
+--- sesi $(basename $f) ---
+$(head -c 1500 "$f")"
+done
+
+if [ $# -eq 0 ]; then
+  echo "Pakai: agyx \"pertanyaan lu\""
+  exit 1
+fi
+
+Q="$*"
+TS=$(date '+%Y%m%d_%H%M%S')
+CTX=$(head -c 6000 "$MEM")
+AG=$(head -c 2500 "$AGENTS")
+
+PROMPT="KONTEKS CIMOK (hafalkan, jangan tanya ulang):
+--- memori.md ---
+$CTX
+--- AGENTS.md (ringkas) ---
+$AG
+--- skill.md: skill & 7 agent karaoke terkunci ada di $SKILL ---
+--- 3 sesi terakhir ---
+$RECENT
+ATURAN: jawab Bahasa Indonesia, mode caveman (singkat, langsung inti).
+PERTANYAAN USER: $Q"
+
+OUT="$LOGDIR/$TS.md"
+{
+  echo "# agyx $TS"
+  echo
+  echo "## Tanya"
+  echo "$Q"
+  echo
+  echo "## Jawab"
+  $AGY -p "$PROMPT" --add-dir /root 2>&1
+} | tee "$OUT"
+
+# auto-save: ringkas otomatis bila log numpuk (>50 file -> arsip + digest)
+N=$(ls "$LOGDIR"/*.md 2>/dev/null | wc -l)
+if [ "$N" -gt 50 ]; then
+  mkdir -p "$LOGDIR/archive"
+  DIGEST="$LOGDIR/DIGEST.md"
+  echo "# Digest arsip $(date '+%Y-%m-%d %H:%M')" >> "$DIGEST"
+  for f in $(ls -t "$LOGDIR"/*.md | tail -n +31); do
+    echo >> "$DIGEST"
+    echo "## $(basename $f)" >> "$DIGEST"
+    grep -A3 '^## Tanya' "$f" | head -n 5 >> "$DIGEST"
+    grep -A8 '^## Jawab' "$f" | head -c 400 >> "$DIGEST"
+    echo >> "$DIGEST"
+    mv "$f" "$LOGDIR/archive/"
+  done
+  echo "[compact OK: sesi lama diarsip + digest]"
+  N=$(ls "$LOGDIR"/*.md 2>/dev/null | wc -l)
+fi
+echo ""
+echo "[auto-save OK: $OUT | total sesi aktif: $N]"

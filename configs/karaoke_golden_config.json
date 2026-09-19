@@ -1,0 +1,84 @@
+{
+  "version": "1.0-GOLDEN-LOCKED",
+  "locked_at": "2026-09-19 09:31 WIB",
+  "approved_by": "User & agent_orchestrator (Manajer)",
+  "pipeline_name": "ZYLVEmedia Official Karaoke Production Standard",
+  "audio_standards": {
+    "separation_engine": "Hugging Face ZeroGPU (abidlabs/music-separation)",
+    "vocal_removal_target": "100% clean, zero hiss artifact",
+    "loudness_target_ebu_r128": "-15.0 dB mean volume",
+    "true_peak_max": "-0.8 dB (zero digital clipping)",
+    "audio_codec": "aac",
+    "sample_rate": 48000,
+    "channels": 2,
+    "bitrate": "192k",
+    "outro_fadeout": "4.0s smooth fadeout before commercial skits/dialogue"
+  },
+  "subtitle_standards": {
+    "timing_engine": "Groq LPU Whisper Large v3",
+    "timestamp_granularity": "word (timestamp_granularities[]=word)",
+    "language": "id",
+    "lead_in_countdown_sec": 3.0,
+    "ass_format": {
+      "font_name": "DejaVu Sans Bold",
+      "font_size": 52,
+      "alignment": 5,
+      "margin_l": 80,
+      "margin_r": 80,
+      "margin_v": 0,
+      "placement": "Tepat di TENGAH Layar (Center Alignment 5)",
+      "primary_color": "&H0000D7FF (Gold / Yellow running highlight)",
+      "secondary_color": "&H00FFFFFF (Clean White unsung text)",
+      "outline_color": "&H00000000 (Pekat Kontras Tinggi)",
+      "outline_width": 4.5,
+      "shadow_depth": 2.5,
+      "karaoke_tag": "\\kf (centisecond millisecond-accurate sync)",
+      "watermark": "ZYLVEmedia • Karaoke Koplo NADA PAS",
+      "intro_title_card_sec": 11.5,
+      "interlude_notice": true,
+      "outro_notice": true
+    }
+  },
+  "visual_standards": {
+    "resolution": "1920x1080 (16:9 Full HD)",
+    "footage_source": "Pexels API footage alam hangat nyata via get_unique_karaoke_bg.py",
+    "banned_elements": ["neon stage", "panggung sintetis", "kartun", "ai-slop"]
+  },
+  "render_standards": {
+    "hardware_acceleration": "AMD Radeon Vega 11 VAAPI (/dev/dri/renderD128)",
+    "gpu_lock_file": "/tmp/vaapi.lock",
+    "video_codec": "h264_vaapi",
+    "video_bitrate": "750k",
+    "maxrate": "850k",
+    "bufsize": "1500k",
+    "expected_speed": "4.2x - 4.6x real-time"
+  },
+  "thumbnail_standards": {
+    "resolution": "1920x1080 (16:9 4K High-CTR)",
+    "typography": "3D Embossed Gold Luxury ('KARAOKE' & Title-Artist)",
+    "neon_badges": ["NADA PAS ORIGINAL", "LIRIK BERJALAN"],
+    "studio_props": ["Metallic studio microphone", "Audio equalizer wave glow"],
+    "artist_render": "Expressive singing pose, cinematic warm lighting, zero AI distortion",
+    "backup_editor": "agent_capcut_editor (CapCut Web session active)"
+  },
+  "duet_karaoke_standards": {
+    "separation_hf": "Unduh vokal dan instrumen terpisah via Hugging Face Space ZeroGPU",
+    "voice_segmentation_whisper": "Groq Whisper Large v3 diarization & word timestamps untuk petakan giliran pria vs wanita",
+    "two_versions_generation": {
+      "version_no_cewek": "Vokal pria aktif + instrumen bersih, vokal wanita di-cut/di-mute total (badge: UNTUK SUARA WANITA)",
+      "version_no_cowok": "Vokal wanita aktif + instrumen bersih, vokal pria di-cut/di-mute total (badge: UNTUK SUARA PRIA)"
+    },
+    "editing_engine": "CapCut Web (agent_capcut_editor) atau otomasi FFmpeg/Pydub",
+    "subtitle_placement": "Tengah layar (Alignment 5, Size 52) dengan label nama artis vs GILIRANMU",
+    "thumbnail_badges": {
+      "no_cewek": "NO VOKAL CEWEK (Neon Pink Glow)",
+      "no_cowok": "NO VOKAL COWOK (Neon Cyan Glow)"
+    }
+  },
+  "audit_governance": {
+    "pre_post_audit_agent": "agent_content_auditor",
+    "quality_gates": ["Pacing & duration", "Audio loudness & clipping", "Hardsub ASS contrast & sync", "Thumbnail CTR & legibility"],
+    "single_gate_reporting": "Wajib melalui agent_orchestrator ke Telegram (subagen hening)",
+    "token_policy": "Strict Zero Cimoy Token (Groq LPU / Gemini API external only)"
+  }
+}

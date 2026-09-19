@@ -1,0 +1,29 @@
+# Gitignore untuk Backup Subagent AI (ZYLVEmedia / Cimoy)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.log
+*.tmp
+*.temp
+
+# Kredensial & Secrets (DILARANG KERAS ke GitHub)
+*token*.json
+*cookies*.json
+*secret*.json
+*.pem
+*.key
+.env
+.env.*
+
+# Media & Binary Besar (Hanya simpan kode, skill, dan config)
+*.mp4
+*.mp3
+*.wav
+*.jpg
+*.jpeg
+*.png
+*.zip
+*.tar.gz
+*.tar

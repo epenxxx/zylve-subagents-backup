@@ -1,0 +1,26 @@
+{
+  "graphify-sync": {
+    "PostToolUse": [
+      {
+        "matcher": "write_to_file",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/root/tools/auto_sync_graphify.sh",
+            "timeout": 15
+          }
+        ]
+      },
+      {
+        "matcher": "replace_file_content",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/root/tools/auto_sync_graphify.sh",
+            "timeout": 15
+          }
+        ]
+      }
+    ]
+  }
+}
