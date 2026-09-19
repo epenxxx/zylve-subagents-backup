@@ -175,43 +175,27 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         f.write(ass_header + "\n".join(events) + "\n")
     print(f"[✓] File ASS sinkron ({len(events)} baris) siap.")
 
-    # 4. Unduh Footage Pexels
-    print(f"[3/6] Mengunduh footage vertikal via Pexels API ('{search_query}')...")
-    footage_path = os.path.join(workdir, "footage.mp4")
-    if not os.path.exists(footage_path):
-        url = f"https://api.pexels.com/videos/search?query={urllib.parse.quote(search_query)}&orientation=portrait&per_page=10"
-        req = urllib.request.Request(url, headers={"Authorization": PEXELS_KEY, "User-Agent": "Mozilla/5.0"})
-        download_url = None
-        with urllib.request.urlopen(req, timeout=20) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
-            videos = data.get("videos", [])
-            for v in videos:
-                for f in v.get("video_files", []):
-                    if f.get("width") == 1080 and f.get("height") == 1920:
-                        download_url = f.get("link")
-                        break
-                if download_url:
-                    break
-            if not download_url and videos:
-                download_url = videos[0]["video_files"][0]["link"]
-
-        if not download_url:
-            raise RuntimeError(f"Gagal menemukan footage vertikal untuk: {search_query}")
-
-        dl_req = urllib.request.Request(download_url, headers={"User-Agent": "Mozilla/5.0"})
-        with urllib.request.urlopen(dl_req, timeout=60) as dl_resp, open(footage_path, "wb") as out_f:
-            out_f.write(dl_resp.read())
-        print("[✓] Footage Pexels berhasil diunduh!")
+    # 4. Unduh & Rakit Footage Multi-Clip Dinamis (Pexels + Pixabay)
+    print(f"[3/6] Memproduksi latar multi-clip dinamis 9:16 (Pexels + Pixabay) per scene...")
+    from multiclip_shorts_builder import build_multiclip_background
+    topic_queries = [
+        search_query,
+        f"{search_query} cinematic",
+        f"{search_query} nature detail",
+        f"{search_query} landscape 4k"
+    ]
+    footage_path = build_multiclip_background(topic_queries, duration, workdir, clip_duration=4.5)
+    print("[✓] Background Multi-Clip Dinamis Berhasil Dirakit!")
 
     # 5. Render FFmpeg 1080x1920
-    print("[4/6] Merender video 9:16 Full HD 1080x1920 via FFmpeg...")
+    print("[4/6] Merender video 9:16 Full HD 1080x1920 + Subtitle Dinamis...")
     render_cmd = [
         "ffmpeg", "-y",
-        "-stream_loop", "-1", "-i", footage_path,
+        "-i", footage_path,
         "-i", audio_path,
         "-t", str(duration),
         "-filter_complex",
-        f"[0:v]scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,ass={ass_path}[v]",
+        f"[0:v]ass={ass_path}[v]",
         "-map", "[v]",
         "-map", "1:a",
         "-c:v", "libx264",
