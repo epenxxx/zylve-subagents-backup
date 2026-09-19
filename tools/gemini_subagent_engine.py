@@ -10,7 +10,7 @@ import json
 import urllib.request
 import urllib.error
 
-API_KEY = os.getenv("GEMINI_API_KEY", "YOUR_GEMINI_API_KEY")
+API_KEY = "os.getenv("GEMINI_API_KEY", "YOUR_GEMINI_API_KEY")"
 
 # Urutan prioritas model
 MODELS = [

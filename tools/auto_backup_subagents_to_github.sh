@@ -34,6 +34,33 @@ fi
 git config user.name "epenxxx"
 git config user.email "epenxxx@users.noreply.github.com"
 
+# Sanitasi otomatis seluruh API keys/secrets agar tidak melanggar GitHub Push Protection
+python3 -c '
+import os
+base = "/root/projects/zylve-subagents-backup"
+replacements = {
+    "os.getenv("GEMINI_API_KEY", "YOUR_GEMINI_API_KEY")": "os.getenv(\"GEMINI_API_KEY\", \"YOUR_GEMINI_API_KEY\")",
+    "YOUR_OPENROUTER_API_KEY": "YOUR_OPENROUTER_API_KEY",
+    "YOUR_GROQ_API_KEY": "YOUR_GROQ_API_KEY",
+    "YOUR_GOOGLE_CLIENT_ID": "YOUR_GOOGLE_CLIENT_ID",
+    "YOUR_GOOGLE_CLIENT_SECRET": "YOUR_GOOGLE_CLIENT_SECRET",
+    "YOUR_PEXELS_API_KEY": "YOUR_PEXELS_API_KEY",
+    "hf_YOUR_HUGGINGFACE_TOKEN": "hf_YOUR_HUGGINGFACE_TOKEN"
+}
+for root, dirs, files in os.walk(base):
+    if ".git" in root: continue
+    for f in files:
+        p = os.path.join(root, f)
+        try:
+            with open(p, "r", errors="ignore") as fp: c = fp.read()
+            mod = False
+            for k, v in replacements.items():
+                if k in c: c = c.replace(k, v); mod = True
+            if mod:
+                with open(p, "w") as fp: fp.write(c)
+        except Exception: pass
+' 2>/dev/null || true
+
 echo "[3/4] Melakukan staging dan commit perubahan..."
 git add .
 
